@@ -1,0 +1,8 @@
+{
+    "name": "Kỳ phạm",
+    "image": "https://s-cart.org/scart-mid.png",
+    "auth": "KyPham",
+    "email": "kyptit94@gmail.com",
+    "website": "https://localhost:8000",
+    "version": "1.0.0"
+}

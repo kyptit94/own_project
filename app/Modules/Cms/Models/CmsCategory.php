@@ -18,7 +18,7 @@ class CmsCategory extends Model
         'keyword',
         'description',
     ];
-    public $lang = 'en';
+    public $lang = 'vi';
     public function __construct()
     {
         parent::__construct();

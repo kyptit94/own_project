@@ -74,7 +74,6 @@ class CmsCategoryController extends Controller
             $obj = $obj->orderBy('id', 'desc');
         }
         $dataTmp = $obj->paginate(20);
-
         $dataTr = [];
         foreach ($dataTmp as $key => $row) {
             $dataTr[] = [
@@ -166,7 +165,6 @@ class CmsCategoryController extends Controller
 //=menu_search
 
         $data['url_delete_item'] = route('admin_cms_category.delete');
-
         return view('admin.screen.list')
             ->with($data);
     }

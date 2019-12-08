@@ -21,7 +21,7 @@ class ShopProduct extends Model
         'description',
         'content',
     ];
-    public $lang = 'en';
+    public $lang = 'vi';
 
     protected static $listSingle = null;
 

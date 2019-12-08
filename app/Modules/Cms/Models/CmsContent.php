@@ -18,7 +18,7 @@ class CmsContent extends Model
         'description',
         'content',
     ];
-    public $lang = 'en';
+    public $lang = 'vi';
     public function __construct()
     {
         parent::__construct();

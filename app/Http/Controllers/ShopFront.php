@@ -7,6 +7,7 @@ use App\Models\ShopBrand;
 use App\Models\ShopCategory;
 use App\Models\ShopProduct;
 use App\Models\ShopVendor;
+use App\Models\ShopBanner;
 use Illuminate\Http\Request;
 
 class ShopFront extends GeneralController
@@ -23,11 +24,13 @@ class ShopFront extends GeneralController
     {
         return view('templates.' . sc_store('template') . '.shop_home',
             array(
-                'products_new' => (new ShopProduct)->getProducts($type = null, $limit = sc_config('product_new'), $opt = null),
-                'products_hot' => (new ShopProduct)->getProducts($type = SC_PRODUCT_HOT, $limit = sc_config('product_hot'), $opt = 'random'),
-                'categories' => (new ShopCategory)->getCategoriesAll(),
+                'products_new_1' => (new ShopProduct)->getProducts($type = null, $limit = 8, $opt = null, $sortBy = null, $sortOrder = 'desc',$offset = 0),
+                'products_new_2' => (new ShopProduct)->getProducts($type = null, $limit = 8, $opt = null, $sortBy = null, $sortOrder = 'desc',$offset = 8),
+                'products_new_3' => (new ShopProduct)->getProducts($type = null, $limit = 8, $opt = null, $sortBy = null, $sortOrder = 'desc',$offset = 16),
+                'banners' => (new ShopBanner)->getAllOn($limit = 3),
                 'products_build' => (new ShopProduct)->getTopBuild($limit = 4),
                 'products_group' => (new ShopProduct)->getTopGroup($limit = 4),
+                'brands_group' => (new ShopBrand)->getBrands($limit = 5),
                 'layout_page' => 'home',
 
             )

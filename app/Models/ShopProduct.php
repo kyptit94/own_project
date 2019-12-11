@@ -190,7 +190,7 @@ Get final price
  * @param  string $sortOrder [description]
  * @return [type]            [description]
  */
-    public function getProducts($type = null, $limit = null, $opt = null, $sortBy = null, $sortOrder = 'desc')
+    public function getProducts($type = null, $limit = null, $opt = null, $sortBy = null, $sortOrder = 'desc',$offset = null)
     {
         $lang = $this->lang;
         $query = $this->where($this->getTable() . '.status', 1)
@@ -211,7 +211,10 @@ Get final price
         //get all
         if (!(int) $limit) {
             return $query->get();
-        } else
+        } elseif ((int) $offset) {
+            return $query->offset($offset)->limit($limit)->get();
+        } 
+        else 
         //paginate
         if ($opt == 'paginate') {
             return $query->paginate((int) $limit);

@@ -2,7 +2,7 @@
     <div class="container">
         <div class="product-out">
             <div class="title">
-                <h2 class="text-center">Product Our</h2>
+                <h2 class="text-center">Sản phẩm</h2>
             </div>
             <div id="demo" class="carousel slide" data-ride="carousel">
                 <!-- Indicators -->
@@ -15,13 +15,21 @@
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <div class="row product">
+                            @foreach ($products_new_1 as  $key => $product_new)
                             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-6 col-12">
                                 <div class="card">
                                     <div class="card-img-top">
-                                        <a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html" class="wp-post-image">
-                                            <img class="image-cover" src="product.jpg" tppabs="http://html.physcode.com/uray/imager/product/product.jpg" alt="product">
+                                        <a href="{{ $product_new->getUrl() }}" tppabs="http://html.physcode.com/uray/product-single.html" class="wp-post-image">
+                                            <img class="image-cover" src="{{ asset($product_new->getThumb()) }}" tppabs="http://html.physcode.com/uray/imager/product/product.jpg" alt="{{ $product_new->name }}">
                                         </a>
-                                        <p class="onnew">New</p>
+                                        
+                                         @if ($product_new->price != $product_new->getFinalPrice() && $product_new->kind != SC_PRODUCT_GROUP)
+                                          <p class="onsale">Sale</p>
+                                          @elseif($product_new->type == SC_PRODUCT_NEW)
+                                          <p class="onnew">New</p>
+                                          @elseif($product_new->type == SC_PRODUCT_HOT)
+                                          <p class="onnew">Hot</p>
+                                          @endif
                                         <div class="icon-product">
                                             <button class="btn">
                                                 <span class="lnr lnr-lock"></span>
@@ -38,11 +46,12 @@
                                     <div class="card-body">
                                         <p class="card-title"><a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">Beauty </a></p>
                                         <p class="woocommerce-loop-product__title"><a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html">
-                                            Cleanser layde</a></p>
+                                            {{ $product_new->name }}</a></p>
                                         <span class="price">
 												<ins>
 													<span class="woocommerce-Price-amount amount">
-														<span class="woocommerce-Price-currencySymbol">$</span>79
+														{{-- <span class="woocommerce-Price-currencySymbol">$</span>79 --}}
+                                                        {!! $product_new->showPrice() !!}
 													</span>
 												</ins>
                                     </span>
@@ -50,268 +59,26 @@
                                 </div>
 
                             </div>
-                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-6 col-12">
-                                <div class="card">
-                                    <div class="card-img-top">
-                                        <a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html" class="wp-post-image">
-                                            <img class="image-cover" src="product2.jpg" tppabs="http://html.physcode.com/uray/imager/product/product2.jpg" alt="product">
-                                        </a>
-                                        <p class="onsale">Sale</p>
-                                        <div class="icon-product">
-                                            <button class="btn">
-                                                <span class="lnr lnr-lock"></span>
-                                            </button>
-                                            <button type="button" class="btn click-quick-view" data-toggle="modal"
-                                                    data-target="#exampleModalCenter">
-                                                <span class="lnr lnr-magnifier"></span>
-                                            </button>
-                                            <button class="btn">
-                                                <span class="lnr lnr-heart"></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <p class="card-title"><a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">Spa</a></p>
-                                        <p class="woocommerce-loop-product__title"><a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html">
-                                            Night cream</a></p>
-
-                                        <span class="price">
-												<del>
-													<span class="woocommerce-Price-amount amount">
-														<span class="woocommerce-Price-currencySymbol">$</span>45
-
-													</span>
-												</del>
-												<ins>
-													<span class="woocommerce-Price-amount amount">
-														<span class="woocommerce-Price-currencySymbol">$</span>38
-													</span>
-												</ins>
-                                    </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-6 col-12">
-                                <div class="card">
-                                    <div class="card-img-top">
-                                        <a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html" class="wp-post-image">
-                                            <img class="image-cover" src="product3.jpg" tppabs="http://html.physcode.com/uray/imager/product/product3.jpg" alt="product">
-                                        </a>
-                                        <div class="icon-product">
-                                            <button class="btn">
-                                                <span class="lnr lnr-lock"></span>
-                                            </button>
-                                            <button type="button" class="btn click-quick-view" data-toggle="modal"
-                                                    data-target="#exampleModalCenter">
-                                                <span class="lnr lnr-magnifier"></span>
-                                            </button>
-                                            <button class="btn">
-                                                <span class="lnr lnr-heart"></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <p class="card-title"><a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">Make up</a></p>
-                                        <p class="woocommerce-loop-product__title"><a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html">
-                                            Cleanser layde</a></p>
-                                        <span class="price">
-												<ins>
-													<span class="woocommerce-Price-amount amount">
-														<span class="woocommerce-Price-currencySymbol">$</span>56
-													</span>
-												</ins>
-                                    </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-6 col-12">
-                                <div class="card">
-                                    <div class="card-img-top">
-                                        <a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html" class="wp-post-image">
-                                            <img class="image-cover" src="product4.jpg" tppabs="http://html.physcode.com/uray/imager/product/product4.jpg" alt="product">
-                                        </a>
-                                        <p class="onnew">New</p>
-                                        <div class="icon-product">
-                                            <button class="btn">
-                                                <span class="lnr lnr-lock"></span>
-                                            </button>
-                                            <button type="button" class="btn click-quick-view" data-toggle="modal"
-                                                    data-target="#exampleModalCenter">
-                                                <span class="lnr lnr-magnifier"></span>
-                                            </button>
-                                            <button class="btn">
-                                                <span class="lnr lnr-heart"></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <p class="card-title"><a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">Beauty </a></p>
-                                        <p class="woocommerce-loop-product__title"><a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html">
-                                            Moisturizing cream</a></p>
-                                        <span class="price">
-
-												<ins>
-													<span class="woocommerce-Price-amount amount">
-														<span class="woocommerce-Price-currencySymbol">$</span>87
-													</span>
-												</ins>
-                                    </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-6 col-12">
-                                <div class="card">
-                                    <div class="card-img-top">
-                                        <a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html" class="wp-post-image">
-                                            <img class="image-cover" src="product5.jpg" tppabs="http://html.physcode.com/uray/imager/product/product5.jpg" alt="product">
-                                        </a>
-                                        <p class="onsale">Sale</p>
-                                        <div class="icon-product">
-                                            <button class="btn">
-                                                <span class="lnr lnr-lock"></span>
-                                            </button>
-                                            <button type="button" class="btn click-quick-view" data-toggle="modal"
-                                                    data-target="#exampleModalCenter">
-                                                <span class="lnr lnr-magnifier"></span>
-                                            </button>
-                                            <button class="btn">
-                                                <span class="lnr lnr-heart"></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <p class="card-title"><a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">Make up </a></p>
-                                        <p class="woocommerce-loop-product__title"><a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html">
-                                            Perfect Spice</a></p>
-
-                                        <span class="price">
-												<del>
-													<span class="woocommerce-Price-amount amount">
-														<span class="woocommerce-Price-currencySymbol">$</span>51
-
-													</span>
-												</del>
-												<ins>
-													<span class="woocommerce-Price-amount amount">
-														<span class="woocommerce-Price-currencySymbol">$</span>41
-													</span>
-												</ins>
-                                    </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-6 col-12">
-                                <div class="card">
-                                    <div class="card-img-top">
-                                        <a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html" class="wp-post-image">
-                                            <img class="image-cover" src="product6.jpg" tppabs="http://html.physcode.com/uray/imager/product/product6.jpg" alt="product">
-                                        </a>
-                                        <div class="icon-product">
-                                            <button class="btn">
-                                                <span class="lnr lnr-lock"></span>
-                                            </button>
-                                            <button type="button" class="btn click-quick-view" data-toggle="modal"
-                                                    data-target="#exampleModalCenter">
-                                                <span class="lnr lnr-magnifier"></span>
-                                            </button>
-                                            <button class="btn">
-                                                <span class="lnr lnr-heart"></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <p class="card-title"><a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">Beauty </a></p>
-                                        <p class="woocommerce-loop-product__title"><a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html">
-                                            Silky smooth skin</a></p>
-                                        <span class="price">
-												<ins>
-													<span class="woocommerce-Price-amount amount">
-														<span class="woocommerce-Price-currencySymbol">$</span>93
-													</span>
-												</ins>
-                                    </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-6 col-12">
-                                <div class="card">
-                                    <div class="card-img-top">
-                                        <a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html" class="wp-post-image">
-                                            <img class="image-cover" src="product7.jpg" tppabs="http://html.physcode.com/uray/imager/product/product7.jpg" alt="product">
-                                        </a>
-                                        <p class="onnew">New</p>
-                                        <div class="icon-product">
-                                            <button class="btn">
-                                                <span class="lnr lnr-lock"></span>
-                                            </button>
-                                            <button type="button" class="btn click-quick-view" data-toggle="modal"
-                                                    data-target="#exampleModalCenter">
-                                                <span class="lnr lnr-magnifier"></span>
-                                            </button>
-                                            <button class="btn">
-                                                <span class="lnr lnr-heart"></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <p class="card-title"><a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">Spa</a></p>
-                                        <p class="woocommerce-loop-product__title"><a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html">
-                                            Whitening cream</a></p>
-                                        <span class="price">
-												<ins>
-													<span class="woocommerce-Price-amount amount">
-														<span class="woocommerce-Price-currencySymbol">$</span>45
-													</span>
-												</ins>
-                                    </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-6 col-12">
-                                <div class="card">
-                                    <div class="card-img-top">
-                                        <a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html" class="wp-post-image">
-                                            <img class="image-cover" src="product8.jpg" tppabs="http://html.physcode.com/uray/imager/product/product8.jpg" alt="product">
-                                        </a>
-                                        <p class="onnew">New</p>
-                                        <div class="icon-product">
-                                            <button class="btn">
-                                                <span class="lnr lnr-lock"></span>
-                                            </button>
-                                            <button type="button" class="btn click-quick-view" data-toggle="modal"
-                                                    data-target="#exampleModalCenter">
-                                                <span class="lnr lnr-magnifier"></span>
-                                            </button>
-                                            <button class="btn">
-                                                <span class="lnr lnr-heart"></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <p class="card-title"><a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html">Beauty </a></p>
-                                        <p class="woocommerce-loop-product__title"><a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html">
-                                            Water flower</a></p>
-                                        <span class="price">
-												<ins>
-													<span class="woocommerce-Price-amount amount">
-														<span class="woocommerce-Price-currencySymbol">$</span>62
-													</span>
-												</ins>
-                                    </span>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                     <div class="carousel-item">
                         <div class="row product">
+                            @foreach ($products_new_2 as  $key => $product_new)
                             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-6 col-12">
                                 <div class="card">
                                     <div class="card-img-top">
-                                        <a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html" class="wp-post-image">
-                                            <img class="image-cover" src="product.jpg" tppabs="http://html.physcode.com/uray/imager/product/product.jpg" alt="product">
+                                        <a href="{{ $product_new->getUrl() }}" tppabs="http://html.physcode.com/uray/product-single.html" class="wp-post-image">
+                                            <img class="image-cover" src="{{ asset($product_new->getThumb()) }}" tppabs="http://html.physcode.com/uray/imager/product/product.jpg" alt="{{ $product_new->name }}">
                                         </a>
-                                        <p class="onnew">New</p>
+                                        
+                                         @if ($product_new->price != $product_new->getFinalPrice() && $product_new->kind != SC_PRODUCT_GROUP)
+                                          <p class="onsale">Sale</p>
+                                          @elseif($product_new->type == SC_PRODUCT_NEW)
+                                          <p class="onnew">New</p>
+                                          @elseif($product_new->type == SC_PRODUCT_HOT)
+                                          <p class="onnew">Hot</p>
+                                          @endif
                                         <div class="icon-product">
                                             <button class="btn">
                                                 <span class="lnr lnr-lock"></span>
@@ -326,282 +93,41 @@
                                         </div>
                                     </div>
                                     <div class="card-body">
-                                        <p class="card-title"><a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">Beauty </a></p>
+                                        <p class="card-title"><a href="{{ $product_new->getUrl() }}" tppabs="http://html.physcode.com/uray/product-list.html">Beauty </a></p>
                                         <p class="woocommerce-loop-product__title"><a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html">
-                                            Cleanser layde</a></p>
+                                            {{ $product_new->name }}</a></p>
                                         <span class="price">
-												<ins>
-													<span class="woocommerce-Price-amount amount">
-														<span class="woocommerce-Price-currencySymbol">$</span>79
-													</span>
-												</ins>
+                                                <ins>
+                                                    <span class="woocommerce-Price-amount amount">
+                                                        {{-- <span class="woocommerce-Price-currencySymbol">$</span>79 --}}
+                                                        {!! $product_new->showPrice() !!}
+                                                    </span>
+                                                </ins>
                                     </span>
                                     </div>
                                 </div>
 
                             </div>
-                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-6 col-12">
-                                <div class="card">
-                                    <div class="card-img-top">
-                                        <a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html" class="wp-post-image">
-                                            <img class="image-cover" src="product2.jpg" tppabs="http://html.physcode.com/uray/imager/product/product2.jpg" alt="product">
-                                        </a>
-                                        <p class="onsale">Sale</p>
-                                        <div class="icon-product">
-                                            <button class="btn">
-                                                <span class="lnr lnr-lock"></span>
-                                            </button>
-                                            <button type="button" class="btn click-quick-view" data-toggle="modal"
-                                                    data-target="#exampleModalCenter">
-                                                <span class="lnr lnr-magnifier"></span>
-                                            </button>
-                                            <button class="btn">
-                                                <span class="lnr lnr-heart"></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <p class="card-title"><a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">Spa</a></p>
-                                        <p class="woocommerce-loop-product__title"><a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html">
-                                            Night cream</a></p>
-
-                                        <span class="price">
-												<del>
-													<span class="woocommerce-Price-amount amount">
-														<span class="woocommerce-Price-currencySymbol">$</span>45
-
-													</span>
-												</del>
-												<ins>
-													<span class="woocommerce-Price-amount amount">
-														<span class="woocommerce-Price-currencySymbol">$</span>38
-													</span>
-												</ins>
-                                    </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-6 col-12">
-                                <div class="card">
-                                    <div class="card-img-top">
-                                        <a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html" class="wp-post-image">
-                                            <img class="image-cover" src="product3.jpg" tppabs="http://html.physcode.com/uray/imager/product/product3.jpg" alt="product">
-                                        </a>
-                                        <div class="icon-product">
-                                            <button class="btn">
-                                                <span class="lnr lnr-lock"></span>
-                                            </button>
-                                            <button type="button" class="btn click-quick-view" data-toggle="modal"
-                                                    data-target="#exampleModalCenter">
-                                                <span class="lnr lnr-magnifier"></span>
-                                            </button>
-                                            <button class="btn">
-                                                <span class="lnr lnr-heart"></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <p class="card-title"><a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">Make up</a></p>
-                                        <p class="woocommerce-loop-product__title"><a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html">
-                                            Cleanser layde</a></p>
-                                        <span class="price">
-												<ins>
-													<span class="woocommerce-Price-amount amount">
-														<span class="woocommerce-Price-currencySymbol">$</span>56
-													</span>
-												</ins>
-                                    </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-6 col-12">
-                                <div class="card">
-                                    <div class="card-img-top">
-                                        <a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html" class="wp-post-image">
-                                            <img class="image-cover" src="product4.jpg" tppabs="http://html.physcode.com/uray/imager/product/product4.jpg" alt="product">
-                                        </a>
-                                        <p class="onnew">New</p>
-                                        <div class="icon-product">
-                                            <button class="btn">
-                                                <span class="lnr lnr-lock"></span>
-                                            </button>
-                                            <button type="button" class="btn click-quick-view" data-toggle="modal"
-                                                    data-target="#exampleModalCenter">
-                                                <span class="lnr lnr-magnifier"></span>
-                                            </button>
-                                            <button class="btn">
-                                                <span class="lnr lnr-heart"></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <p class="card-title"><a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">Beauty </a></p>
-                                        <p class="woocommerce-loop-product__title"><a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html">
-                                            Moisturizing cream</a></p>
-                                        <span class="price">
-
-												<ins>
-													<span class="woocommerce-Price-amount amount">
-														<span class="woocommerce-Price-currencySymbol">$</span>87
-													</span>
-												</ins>
-                                    </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-6 col-12">
-                                <div class="card">
-                                    <div class="card-img-top">
-                                        <a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html" class="wp-post-image">
-                                            <img class="image-cover" src="product5.jpg" tppabs="http://html.physcode.com/uray/imager/product/product5.jpg" alt="product">
-                                        </a>
-                                        <p class="onsale">Sale</p>
-                                        <div class="icon-product">
-                                            <button class="btn">
-                                                <span class="lnr lnr-lock"></span>
-                                            </button>
-                                            <button type="button" class="btn click-quick-view" data-toggle="modal"
-                                                    data-target="#exampleModalCenter">
-                                                <span class="lnr lnr-magnifier"></span>
-                                            </button>
-                                            <button class="btn">
-                                                <span class="lnr lnr-heart"></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <p class="card-title"><a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">Make up </a></p>
-                                        <p class="woocommerce-loop-product__title"><a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html">
-                                            Perfect Spice</a></p>
-
-                                        <span class="price">
-												<del>
-													<span class="woocommerce-Price-amount amount">
-														<span class="woocommerce-Price-currencySymbol">$</span>51
-
-													</span>
-												</del>
-												<ins>
-													<span class="woocommerce-Price-amount amount">
-														<span class="woocommerce-Price-currencySymbol">$</span>41
-													</span>
-												</ins>
-                                    </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-6 col-12">
-                                <div class="card">
-                                    <div class="card-img-top">
-                                        <a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html" class="wp-post-image">
-                                            <img class="image-cover" src="product6.jpg" tppabs="http://html.physcode.com/uray/imager/product/product6.jpg" alt="product">
-                                        </a>
-                                        <div class="icon-product">
-                                            <button class="btn">
-                                                <span class="lnr lnr-lock"></span>
-                                            </button>
-                                            <button type="button" class="btn click-quick-view" data-toggle="modal"
-                                                    data-target="#exampleModalCenter">
-                                                <span class="lnr lnr-magnifier"></span>
-                                            </button>
-                                            <button class="btn">
-                                                <span class="lnr lnr-heart"></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <p class="card-title"><a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">Beauty </a></p>
-                                        <p class="woocommerce-loop-product__title"><a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html">
-                                            Silky smooth skin</a></p>
-                                        <span class="price">
-												<ins>
-													<span class="woocommerce-Price-amount amount">
-														<span class="woocommerce-Price-currencySymbol">$</span>93
-													</span>
-												</ins>
-                                    </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-6 col-12">
-                                <div class="card">
-                                    <div class="card-img-top">
-                                        <a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html" class="wp-post-image">
-                                            <img class="image-cover" src="product7.jpg" tppabs="http://html.physcode.com/uray/imager/product/product7.jpg" alt="product">
-                                        </a>
-                                        <p class="onnew">New</p>
-                                        <div class="icon-product">
-                                            <button class="btn">
-                                                <span class="lnr lnr-lock"></span>
-                                            </button>
-                                            <button type="button" class="btn click-quick-view" data-toggle="modal"
-                                                    data-target="#exampleModalCenter">
-                                                <span class="lnr lnr-magnifier"></span>
-                                            </button>
-                                            <button class="btn">
-                                                <span class="lnr lnr-heart"></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <p class="card-title"><a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">Spa</a></p>
-                                        <p class="woocommerce-loop-product__title"><a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html">
-                                            Whitening cream</a></p>
-                                        <span class="price">
-												<ins>
-													<span class="woocommerce-Price-amount amount">
-														<span class="woocommerce-Price-currencySymbol">$</span>45
-													</span>
-												</ins>
-                                    </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-6 col-12">
-                                <div class="card">
-                                    <div class="card-img-top">
-                                        <a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html" class="wp-post-image">
-                                            <img class="image-cover" src="product8.jpg" tppabs="http://html.physcode.com/uray/imager/product/product8.jpg" alt="product">
-                                        </a>
-                                        <p class="onnew">New</p>
-                                        <div class="icon-product">
-                                            <button class="btn">
-                                                <span class="lnr lnr-lock"></span>
-                                            </button>
-                                            <button type="button" class="btn click-quick-view" data-toggle="modal"
-                                                    data-target="#exampleModalCenter">
-                                                <span class="lnr lnr-magnifier"></span>
-                                            </button>
-                                            <button class="btn">
-                                                <span class="lnr lnr-heart"></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <p class="card-title"><a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html">Beauty </a></p>
-                                        <p class="woocommerce-loop-product__title"><a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html">
-                                            Water flower</a></p>
-                                        <span class="price">
-												<ins>
-													<span class="woocommerce-Price-amount amount">
-														<span class="woocommerce-Price-currencySymbol">$</span>62
-													</span>
-												</ins>
-                                    </span>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                     <div class="carousel-item">
                         <div class="row product">
+                            @foreach ($products_new_3 as  $key => $product_new)
                             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-6 col-12">
                                 <div class="card">
                                     <div class="card-img-top">
-                                        <a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html" class="wp-post-image">
-                                            <img class="image-cover" src="product.jpg" tppabs="http://html.physcode.com/uray/imager/product/product.jpg" alt="product">
+                                        <a href="{{ $product_new->getUrl() }}" tppabs="http://html.physcode.com/uray/product-single.html" class="wp-post-image">
+                                            <img class="image-cover" src="{{ asset($product_new->getThumb()) }}" tppabs="http://html.physcode.com/uray/imager/product/product.jpg" alt="{{ $product_new->name }}">
                                         </a>
-                                        <p class="onnew">New</p>
+                                        
+                                         @if ($product_new->price != $product_new->getFinalPrice() && $product_new->kind != SC_PRODUCT_GROUP)
+                                          <p class="onsale">Sale</p>
+                                          @elseif($product_new->type == SC_PRODUCT_NEW)
+                                          <p class="onnew">New</p>
+                                          @elseif($product_new->type == SC_PRODUCT_HOT)
+                                          <p class="onnew">Hot</p>
+                                          @endif
                                         <div class="icon-product">
                                             <button class="btn">
                                                 <span class="lnr lnr-lock"></span>
@@ -618,269 +144,20 @@
                                     <div class="card-body">
                                         <p class="card-title"><a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">Beauty </a></p>
                                         <p class="woocommerce-loop-product__title"><a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html">
-                                            Cleanser layde</a></p>
+                                            {{ $product_new->name }}</a></p>
                                         <span class="price">
-												<ins>
-													<span class="woocommerce-Price-amount amount">
-														<span class="woocommerce-Price-currencySymbol">$</span>79
-													</span>
-												</ins>
+                                                <ins>
+                                                    <span class="woocommerce-Price-amount amount">
+                                                        {{-- <span class="woocommerce-Price-currencySymbol">$</span>79 --}}
+                                                        {!! $product_new->showPrice() !!}
+                                                    </span>
+                                                </ins>
                                     </span>
                                     </div>
                                 </div>
 
                             </div>
-                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-6 col-12">
-                                <div class="card">
-                                    <div class="card-img-top">
-                                        <a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html" class="wp-post-image">
-                                            <img class="image-cover" src="product2.jpg" tppabs="http://html.physcode.com/uray/imager/product/product2.jpg" alt="product">
-                                        </a>
-                                        <p class="onsale">Sale</p>
-                                        <div class="icon-product">
-                                            <button class="btn">
-                                                <span class="lnr lnr-lock"></span>
-                                            </button>
-                                            <button type="button" class="btn click-quick-view" data-toggle="modal"
-                                                    data-target="#exampleModalCenter">
-                                                <span class="lnr lnr-magnifier"></span>
-                                            </button>
-                                            <button class="btn">
-                                                <span class="lnr lnr-heart"></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <p class="card-title"><a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">Spa</a></p>
-                                        <p class="woocommerce-loop-product__title"><a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html">
-                                            Night cream</a></p>
-
-                                        <span class="price">
-												<del>
-													<span class="woocommerce-Price-amount amount">
-														<span class="woocommerce-Price-currencySymbol">$</span>45
-
-													</span>
-												</del>
-												<ins>
-													<span class="woocommerce-Price-amount amount">
-														<span class="woocommerce-Price-currencySymbol">$</span>38
-													</span>
-												</ins>
-                                    </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-6 col-12">
-                                <div class="card">
-                                    <div class="card-img-top">
-                                        <a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html" class="wp-post-image">
-                                            <img class="image-cover" src="product3.jpg" tppabs="http://html.physcode.com/uray/imager/product/product3.jpg" alt="product">
-                                        </a>
-                                        <div class="icon-product">
-                                            <button class="btn">
-                                                <span class="lnr lnr-lock"></span>
-                                            </button>
-                                            <button type="button" class="btn click-quick-view" data-toggle="modal"
-                                                    data-target="#exampleModalCenter">
-                                                <span class="lnr lnr-magnifier"></span>
-                                            </button>
-                                            <button class="btn">
-                                                <span class="lnr lnr-heart"></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <p class="card-title"><a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">Make up</a></p>
-                                        <p class="woocommerce-loop-product__title"><a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html">
-                                            Cleanser layde</a></p>
-                                        <span class="price">
-												<ins>
-													<span class="woocommerce-Price-amount amount">
-														<span class="woocommerce-Price-currencySymbol">$</span>56
-													</span>
-												</ins>
-                                    </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-6 col-12">
-                                <div class="card">
-                                    <div class="card-img-top">
-                                        <a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html" class="wp-post-image">
-                                            <img class="image-cover" src="product4.jpg" tppabs="http://html.physcode.com/uray/imager/product/product4.jpg" alt="product">
-                                        </a>
-                                        <p class="onnew">New</p>
-                                        <div class="icon-product">
-                                            <button class="btn">
-                                                <span class="lnr lnr-lock"></span>
-                                            </button>
-                                            <button type="button" class="btn click-quick-view" data-toggle="modal"
-                                                    data-target="#exampleModalCenter">
-                                                <span class="lnr lnr-magnifier"></span>
-                                            </button>
-                                            <button class="btn">
-                                                <span class="lnr lnr-heart"></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <p class="card-title"><a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">Beauty </a></p>
-                                        <p class="woocommerce-loop-product__title"><a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html">
-                                            Moisturizing cream</a></p>
-                                        <span class="price">
-
-												<ins>
-													<span class="woocommerce-Price-amount amount">
-														<span class="woocommerce-Price-currencySymbol">$</span>87
-													</span>
-												</ins>
-                                    </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-6 col-12">
-                                <div class="card">
-                                    <div class="card-img-top">
-                                        <a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html" class="wp-post-image">
-                                            <img class="image-cover" src="product5.jpg" tppabs="http://html.physcode.com/uray/imager/product/product5.jpg" alt="product">
-                                        </a>
-                                        <p class="onsale">Sale</p>
-                                        <div class="icon-product">
-                                            <button class="btn">
-                                                <span class="lnr lnr-lock"></span>
-                                            </button>
-                                            <button type="button" class="btn click-quick-view" data-toggle="modal"
-                                                    data-target="#exampleModalCenter">
-                                                <span class="lnr lnr-magnifier"></span>
-                                            </button>
-                                            <button class="btn">
-                                                <span class="lnr lnr-heart"></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <p class="card-title"><a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">Make up </a></p>
-                                        <p class="woocommerce-loop-product__title"><a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html">
-                                            Perfect Spice</a></p>
-
-                                        <span class="price">
-												<del>
-													<span class="woocommerce-Price-amount amount">
-														<span class="woocommerce-Price-currencySymbol">$</span>51
-
-													</span>
-												</del>
-												<ins>
-													<span class="woocommerce-Price-amount amount">
-														<span class="woocommerce-Price-currencySymbol">$</span>41
-													</span>
-												</ins>
-                                    </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-6 col-12">
-                                <div class="card">
-                                    <div class="card-img-top">
-                                        <a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html" class="wp-post-image">
-                                            <img class="image-cover" src="product6.jpg" tppabs="http://html.physcode.com/uray/imager/product/product6.jpg" alt="product">
-                                        </a>
-                                        <div class="icon-product">
-                                            <button class="btn">
-                                                <span class="lnr lnr-lock"></span>
-                                            </button>
-                                            <button type="button" class="btn click-quick-view" data-toggle="modal"
-                                                    data-target="#exampleModalCenter">
-                                                <span class="lnr lnr-magnifier"></span>
-                                            </button>
-                                            <button class="btn">
-                                                <span class="lnr lnr-heart"></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <p class="card-title"><a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">Beauty </a></p>
-                                        <p class="woocommerce-loop-product__title"><a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html">
-                                            Silky smooth skin</a></p>
-                                        <span class="price">
-												<ins>
-													<span class="woocommerce-Price-amount amount">
-														<span class="woocommerce-Price-currencySymbol">$</span>93
-													</span>
-												</ins>
-                                    </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-6 col-12">
-                                <div class="card">
-                                    <div class="card-img-top">
-                                        <a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html" class="wp-post-image">
-                                            <img class="image-cover" src="product7.jpg" tppabs="http://html.physcode.com/uray/imager/product/product7.jpg" alt="product">
-                                        </a>
-                                        <p class="onnew">New</p>
-                                        <div class="icon-product">
-                                            <button class="btn">
-                                                <span class="lnr lnr-lock"></span>
-                                            </button>
-                                            <button type="button" class="btn click-quick-view" data-toggle="modal"
-                                                    data-target="#exampleModalCenter">
-                                                <span class="lnr lnr-magnifier"></span>
-                                            </button>
-                                            <button class="btn">
-                                                <span class="lnr lnr-heart"></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <p class="card-title"><a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">Spa</a></p>
-                                        <p class="woocommerce-loop-product__title"><a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html">
-                                            Whitening cream</a></p>
-                                        <span class="price">
-												<ins>
-													<span class="woocommerce-Price-amount amount">
-														<span class="woocommerce-Price-currencySymbol">$</span>45
-													</span>
-												</ins>
-                                    </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-6 col-12">
-                                <div class="card">
-                                    <div class="card-img-top">
-                                        <a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html" class="wp-post-image">
-                                            <img class="image-cover" src="product8.jpg" tppabs="http://html.physcode.com/uray/imager/product/product8.jpg" alt="product">
-                                        </a>
-                                        <p class="onnew">New</p>
-                                        <div class="icon-product">
-                                            <button class="btn">
-                                                <span class="lnr lnr-lock"></span>
-                                            </button>
-                                            <button type="button" class="btn click-quick-view" data-toggle="modal"
-                                                    data-target="#exampleModalCenter">
-                                                <span class="lnr lnr-magnifier"></span>
-                                            </button>
-                                            <button class="btn">
-                                                <span class="lnr lnr-heart"></span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <p class="card-title"><a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html">Beauty </a></p>
-                                        <p class="woocommerce-loop-product__title"><a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html">
-                                            Water flower</a></p>
-                                        <span class="price">
-												<ins>
-													<span class="woocommerce-Price-amount amount">
-														<span class="woocommerce-Price-currencySymbol">$</span>62
-													</span>
-												</ins>
-                                    </span>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>

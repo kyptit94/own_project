@@ -9,6 +9,17 @@ class ShopBanner extends Model
     public $table = 'shop_banner';
     protected $guarded = [];
 
+/**
+ * Get banner status ON
+ * @param  integer $limit
+ * @param  string  $orderBy field
+ * @param  string  $sort    asc|desc
+ */
+    public static function getAllOn($limit = 8, $orderBy = 'id', $sort = 'desc')
+    {
+        return self::where('status', 1)->orderBy($orderBy, $sort)
+            ->limit($limit)->get();
+    }
 /*
 Get thumb
  */

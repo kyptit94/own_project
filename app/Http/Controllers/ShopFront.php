@@ -24,10 +24,13 @@ class ShopFront extends GeneralController
     {
         return view('templates.' . sc_store('template') . '.shop_home',
             array(
-                'products_new_1' => (new ShopProduct)->getProducts($type = null, $limit = 8, $opt = null, $sortBy = null, $sortOrder = 'desc',$offset = 0),
-                'products_new_2' => (new ShopProduct)->getProducts($type = null, $limit = 8, $opt = null, $sortBy = null, $sortOrder = 'desc',$offset = 8),
-                'products_new_3' => (new ShopProduct)->getProducts($type = null, $limit = 8, $opt = null, $sortBy = null, $sortOrder = 'desc',$offset = 16),
-                'banners' => (new ShopBanner)->getAllOn($limit = 3),
+                'products_new_1' => (new ShopProduct)->getProducts($type = SC_PRODUCT_NEW, $limit = 8, $opt = null, $sortBy = null, $sortOrder = 'desc',$offset = 0),
+                'products_new_2' => (new ShopProduct)->getProducts($type = SC_PRODUCT_NEW, $limit = 8, $opt = null, $sortBy = null, $sortOrder = 'desc',$offset = 8),
+                'products_new_3' => (new ShopProduct)->getProducts($type = SC_PRODUCT_NEW, $limit = 8, $opt = null, $sortBy = null, $sortOrder = 'desc',$offset = 16),
+                'products_hot_1' => (new ShopProduct)->getProducts($type = SC_PRODUCT_HOT, $limit = 2, $opt = null, $sortBy = null, $sortOrder = 'desc',$offset = 0),
+                'products_hot_2' => (new ShopProduct)->getProducts($type = SC_PRODUCT_HOT, $limit = 2, $opt = null, $sortBy = null, $sortOrder = 'desc',$offset = 2),
+                'products_hot_3' => (new ShopProduct)->getProducts($type = SC_PRODUCT_HOT, $limit = 2, $opt = null, $sortBy = null, $sortOrder = 'desc',$offset = 4),
+                'banners' => (new ShopBanner)->getAllOn(),
                 'products_build' => (new ShopProduct)->getTopBuild($limit = 4),
                 'products_group' => (new ShopProduct)->getTopGroup($limit = 4),
                 'brands_group' => (new ShopBrand)->getBrands($limit = 5),

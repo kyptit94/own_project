@@ -203,7 +203,7 @@ Get final price
             $query = $query->where('type', $type);
         }
 
-        //Hidden product out of stock
+                //Hidden product out of stock
         if (empty(sc_config('product_display_out_of_stock'))) {
             $query = $query->where('stock', '>', 0);
         }

@@ -2,14 +2,18 @@
     <div class="container">
         <div class="product-out">
             <div class="title">
-                <h2 class="text-center">Sản phẩm</h2>
+                <h2 class="text-center">Sản phẩm mới</h2>
             </div>
             <div id="demo" class="carousel slide" data-ride="carousel">
                 <!-- Indicators -->
                 <ul class="carousel-indicators">
                     <li data-target="#demo" data-slide-to="0" class="active"></li>
+                    @if(count($products_new_2) > 0)
                     <li data-target="#demo" data-slide-to="1"></li>
+                    @endif
+                    @if(count($products_new_3) > 0)
                     <li data-target="#demo" data-slide-to="2"></li>
+                    @endif
                 </ul>
                 <!-- The slideshow -->
                 <div class="carousel-inner">
@@ -62,6 +66,7 @@
                             @endforeach
                         </div>
                     </div>
+                    @if(count($products_new_2) > 0)
                     <div class="carousel-item">
                         <div class="row product">
                             @foreach ($products_new_2 as  $key => $product_new)
@@ -111,6 +116,8 @@
                             @endforeach
                         </div>
                     </div>
+                    @endif
+                    @if(count($products_new_3) > 0)
                     <div class="carousel-item">
                         <div class="row product">
                             @foreach ($products_new_3 as  $key => $product_new)
@@ -160,6 +167,7 @@
                             @endforeach
                         </div>
                     </div>
+                    @endif
                 </div>
                 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">

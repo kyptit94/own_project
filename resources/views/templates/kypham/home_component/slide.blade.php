@@ -27,4 +27,4 @@
         </div>
 
     </div>
-    <!--end slide-homepage-1
+    <!--end slide-homepage-1 -->

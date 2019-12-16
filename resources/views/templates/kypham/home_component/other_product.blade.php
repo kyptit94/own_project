@@ -25,13 +25,14 @@
                     </div>
                     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner">
+                            @if(count($products_hot_1) > 0)
                             <div class="carousel-item active">
                                 @foreach ($products_hot_1 as  $key => $product_hot)
                                 <div class="card col-md-12 col-sm-12 col-12">
                                     <div class="row no-gutters">
                                         <div class="col-lg-5 col-md-6 col-sm-6 col-12">
                                             <a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html" class="wp-post-image">
-                                                <img class="image-cover" src="best1.jpg" tppabs="http://html.physcode.com/uray/imager/product-popular/best1.jpg"
+                                                <img class="image-cover" src="{{ $product_hot->image }}" tppabs="http://html.physcode.com/uray/imager/product-popular/best1.jpg"
                                                      alt="product">
                                             </a>
                                             @if ($product_hot->price != $product_hot->getFinalPrice() && $product_hot->kind != SC_PRODUCT_GROUP)
@@ -67,39 +68,41 @@
                                 </div>
                                 @endforeach
                             </div>
+                            @endif
+                            @if(count($products_hot_2) > 0)
                             <div class="carousel-item">
-
+                                @foreach ($products_hot_2 as  $key => $product_hot)
                                 <div class="card col-md-12 col-sm-12 col-12">
                                     <div class="row no-gutters">
                                         <div class="col-lg-5 col-md-6 col-sm-6 col-12">
                                             <a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html" class="wp-post-image">
-                                                <img class="image-cover" src="best1.jpg" tppabs="http://html.physcode.com/uray/imager/product-popular/best1.jpg"
+                                                <img class="image-cover" src="{{ $product_hot->image }}" tppabs="http://html.physcode.com/uray/imager/product-popular/best1.jpg"
                                                      alt="product">
                                             </a>
-                                            <p class="onsale">Sale</p>
+                                            @if ($product_hot->price != $product_hot->getFinalPrice() && $product_hot->kind != SC_PRODUCT_GROUP)
+                                          <p class="onsale">Sale</p>
+                                          @elseif($product_hot->type == SC_PRODUCT_NEW)
+                                          <p class="onnew">New</p>
+                                          @elseif($product_hot->type == SC_PRODUCT_HOT)
+                                          <p class="onnew">Hot</p>
+                                          @endif
                                         </div>
-                                        <div class="col-lg-7 col-md-6 col-sm-6 col-12">
+                                        <div class=" col-lg-7 col-md-6 col-sm-6 col-12">
                                             <div class="card-body">
                                                 <p class="card-title"><a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">Beauty </a></p>
                                                 <p class="woocommerce-loop-product__title"><a
                                                         href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html">
-                                                    Nutritional herbs</a></p>
+                                                    {{ $product_hot->name }}</a></p>
 
                                                 <span class="price">
-												<del>
-													<span class="woocommerce-Price-amount amount">
-														<span class="woocommerce-Price-currencySymbol">$</span>51
-
-													</span>
-												</del>
-												<ins>
-													<span class="woocommerce-Price-amount amount">
-														<span class="woocommerce-Price-currencySymbol">$</span>41
-													</span>
-												</ins>
+                                                <ins>
+                                                    <span class="woocommerce-Price-amount amount">
+                                                        {!! $product_hot->showPrice() !!}
+                                                    </span>
+                                                </ins>
                                     </span>
                                                 <div class="content-best-new">
-                                                    <p>But I must explain to you how all this mistaken idea of denouncing pleasure.</p>
+                                                    <p>{{ $product_hot->description }}</p>
                                                 </div>
                                                 <button>ADD TO CARD</button>
                                                 <button><span class="lnr lnr-heart"></span></button>
@@ -107,72 +110,43 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card col-md-12 col-sm-12 col-12">
-                                    <div class="row no-gutters">
-                                        <div class="col-lg-5 col-md-6 col-sm-6 col-12">
-                                            <a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html" class="wp-post-image">
-                                                <img class="image-cover" src="best2.jpg" tppabs="http://html.physcode.com/uray/imager/product-popular/best2.jpg"
-                                                     alt="product">
-                                            </a>
-                                        </div>
-                                        <div class="col-lg-7 col-md-6 col-sm-6 col-12">
-                                            <div class="card-body">
-                                                <p class="card-title"><a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">Makeup </a></p>
-                                                <p class="woocommerce-loop-product__title"><a
-                                                        href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html">
-                                                    Against aging</a></p>
-
-                                                <span class="price">
-												<ins>
-													<span class="woocommerce-Price-amount amount">
-														<span class="woocommerce-Price-currencySymbol">$</span>79
-													</span>
-												</ins>
-                                    </span>
-                                                <div class="content-best-new">
-                                                    <p>On the other hand, we denounce with righteous indignation and
-                                                        dislike
-                                                        men.</p>
-                                                </div>
-                                                <button>ADD TO CARD</button>
-                                                <button><span class="lnr lnr-heart"></span></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
+                            @endif
+                            @if(count($products_hot_3) > 0)
                             <div class="carousel-item">
+                                @foreach ($products_hot_3 as  $key => $product_hot)
                                 <div class="card col-md-12 col-sm-12 col-12">
                                     <div class="row no-gutters">
                                         <div class="col-lg-5 col-md-6 col-sm-6 col-12">
                                             <a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html" class="wp-post-image">
-                                                <img class="image-cover" src="best1.jpg" tppabs="http://html.physcode.com/uray/imager/product-popular/best1.jpg"
+                                                <img class="image-cover" src="{{ $product_hot->image }}" tppabs="http://html.physcode.com/uray/imager/product-popular/best1.jpg"
                                                      alt="product">
                                             </a>
-                                            <p class="onsale">Sale</p>
+                                            @if ($product_hot->price != $product_hot->getFinalPrice() && $product_hot->kind != SC_PRODUCT_GROUP)
+                                          <p class="onsale">Sale</p>
+                                          @elseif($product_hot->type == SC_PRODUCT_NEW)
+                                          <p class="onnew">New</p>
+                                          @elseif($product_hot->type == SC_PRODUCT_HOT)
+                                          <p class="onnew">Hot</p>
+                                          @endif
                                         </div>
-                                        <div class="col-lg-7 col-md-6 col-sm-6 col-12">
+                                        <div class=" col-lg-7 col-md-6 col-sm-6 col-12">
                                             <div class="card-body">
                                                 <p class="card-title"><a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">Beauty </a></p>
                                                 <p class="woocommerce-loop-product__title"><a
                                                         href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html">
-                                                    Nutritional herbs</a></p>
+                                                    {{ $product_hot->name }}</a></p>
 
                                                 <span class="price">
-												<del>
-													<span class="woocommerce-Price-amount amount">
-														<span class="woocommerce-Price-currencySymbol">$</span>51
-
-													</span>
-												</del>
-												<ins>
-													<span class="woocommerce-Price-amount amount">
-														<span class="woocommerce-Price-currencySymbol">$</span>41
-													</span>
-												</ins>
+                                                <ins>
+                                                    <span class="woocommerce-Price-amount amount">
+                                                        {!! $product_hot->showPrice() !!}
+                                                    </span>
+                                                </ins>
                                     </span>
                                                 <div class="content-best-new">
-                                                    <p>But I must explain to you how all this mistaken idea of denouncing pleasure.</p>
+                                                    <p>{{ $product_hot->description }}</p>
                                                 </div>
                                                 <button>ADD TO CARD</button>
                                                 <button><span class="lnr lnr-heart"></span></button>
@@ -180,47 +154,16 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card col-md-12 col-sm-12 col-12">
-                                    <div class="row no-gutters">
-                                        <div class="col-lg-5 col-md-6 col-sm-6 col-12">
-                                            <a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html" class="wp-post-image">
-                                                <img class="image-cover" src="best2.jpg" tppabs="http://html.physcode.com/uray/imager/product-popular/best2.jpg"
-                                                     alt="product">
-                                            </a>
-                                        </div>
-                                        <div class="col-lg-7 col-md-6 col-sm-6 col-12">
-                                            <div class="card-body">
-                                                <p class="card-title"><a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">Makeup </a></p>
-                                                <p class="woocommerce-loop-product__title"><a
-                                                        href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html">
-                                                    Against aging</a></p>
-
-                                                <span class="price">
-												<ins>
-													<span class="woocommerce-Price-amount amount">
-														<span class="woocommerce-Price-currencySymbol">$</span>79
-													</span>
-												</ins>
-                                    </span>
-                                                <div class="content-best-new">
-                                                    <p>On the other hand, we denounce with righteous indignation and
-                                                        dislike
-                                                        men.</p>
-                                                </div>
-                                                <button>ADD TO CARD</button>
-                                                <button><span class="lnr lnr-heart"></span></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
+                            @endif
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
                     <div class="title-best-new">
                         <div class="float-left">
-                            <h2>New Arrivals</h2>
+                            <h2>Sale</h2>
                         </div>
                         <div class="float-right btn-group">
                             <div class="btn-left">
@@ -241,166 +184,40 @@
                     </div>
                     <div id="carouselExampleControls1" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner">
+                            @if(count($products_sale_1) > 0)
                             <div class="carousel-item active">
+                                @foreach ($products_sale_1 as  $key => $product_sale)
                                 <div class="card col-md-12 col-sm-12 col-12">
                                     <div class="row no-gutters">
                                         <div class="col-lg-5 col-md-6 col-sm-6 col-12">
                                             <a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html" class="wp-post-image">
-                                                <img class="image-cover" src="new1.jpg" tppabs="http://html.physcode.com/uray/imager/product-popular/new1.jpg"
+                                                <img class="image-cover" src="{{ $product_sale->image }}" tppabs="http://html.physcode.com/uray/imager/product-popular/best1.jpg"
                                                      alt="product">
                                             </a>
-                                        </div>
-                                        <div class="col-lg-7 col-md-6 col-sm-6 col-12">
-                                            <div class="card-body">
-                                                <p class="card-title"><a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">Spa </a></p>
-                                                <p class="woocommerce-loop-product__title"><a
-                                                        href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html">
-                                                    Baebody eye cream</a></p>
-
-                                                <span class="price">
-												<ins>
-													<span class="woocommerce-Price-amount amount">
-														<span class="woocommerce-Price-currencySymbol">$</span>79
-													</span>
-												</ins>
-                                    </span>
-                                                <div class="content-best-new">
-                                                    <p>Nor again is there anyone who loves or pursues or desires to
-                                                        obtain pain.</p>
-                                                </div>
-                                                <button>ADD TO CARD</button>
-                                                <button><span class="lnr lnr-heart"></span></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card col-md-12 col-sm-12 col-12">
-                                    <div class="row no-gutters">
-                                        <div class="col-lg-5 col-md-6 col-sm-6 col-12">
-                                            <a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html" class="wp-post-image">
-                                                <img class="image-cover" src="new2.jpg" tppabs="http://html.physcode.com/uray/imager/product-popular/new2.jpg"
-                                                     alt="product">
-                                            </a>
-                                            <p class="onnew">New</p>
-                                        </div>
-                                        <div class="col-lg-7 col-md-6 col-sm-6 col-12">
-                                            <div class="card-body">
-                                                <p class="card-title"><a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">Beauty </a></p>
-                                                <p class="woocommerce-loop-product__title"><a
-                                                        href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html">
-                                                    Eye gel for dark </a></p>
-                                                <span class="price">
-												<ins>
-													<span class="woocommerce-Price-amount amount">
-														<span class="woocommerce-Price-currencySymbol">$</span>79
-													</span>
-												</ins>
-                                    </span>
-                                                <div class="content-best-new">
-                                                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                                                        accusantium.</p>
-                                                </div>
-                                                <button>ADD TO CARD</button>
-                                                <button><span class="lnr lnr-heart"></span></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-
-                                <div class="card col-md-12 col-sm-12 col-12">
-                                    <div class="row no-gutters">
-                                        <div class="col-lg-5 col-md-6 col-sm-6 col-12">
-                                            <a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html" class="wp-post-image">
-                                                <img class="image-cover" src="new1.jpg" tppabs="http://html.physcode.com/uray/imager/product-popular/new1.jpg"
-                                                     alt="product">
-                                            </a>
-                                        </div>
-                                        <div class="col-lg-7 col-md-6 col-sm-6 col-12">
-                                            <div class="card-body">
-                                                <p class="card-title"><a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">Spa </a></p>
-                                                <p class="woocommerce-loop-product__title"><a
-                                                        href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html">
-                                                    Baebody eye cream</a></p>
-
-                                                <span class="price">
-												<ins>
-													<span class="woocommerce-Price-amount amount">
-														<span class="woocommerce-Price-currencySymbol">$</span>79
-													</span>
-												</ins>
-                                    </span>
-                                                <div class="content-best-new">
-                                                    <p>Nor again is there anyone who loves or pursues or desires to
-                                                        obtain pain.</p>
-                                                </div>
-                                                <button>ADD TO CARD</button>
-                                                <button><span class="lnr lnr-heart"></span></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card col-md-12 col-sm-12 col-12">
-                                    <div class="row no-gutters">
-                                        <div class=" col-lg-5 col-md-6 col-sm-6 col-12">
-                                            <a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html" class="wp-post-image">
-                                                <img class="image-cover" src="new2.jpg" tppabs="http://html.physcode.com/uray/imager/product-popular/new2.jpg"
-                                                     alt="product">
-                                            </a>
-                                            <p class="onnew">New</p>
-                                        </div>
-                                        <div class="col-lg-7 col-md-6 col-sm-6 col-12">
-                                            <div class="card-body">
-                                                <p class="card-title"><a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">Beauty </a></p>
-                                                <p class="woocommerce-loop-product__title"><a
-                                                        href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html">
-                                                    Eye gel for dark </a></p>
-                                                <span class="price">
-												<ins>
-													<span class="woocommerce-Price-amount amount">
-														<span class="woocommerce-Price-currencySymbol">$</span>79
-													</span>
-												</ins>
-                                    </span>
-                                                <div class="content-best-new">
-                                                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                                                        accusantium.</p>
-                                                </div>
-                                                <button>ADD TO CARD</button>
-                                                <button><span class="lnr lnr-heart"></span></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-
-                                <div class="card col-md-12 col-sm-12 col-12">
-                                    <div class="row no-gutters">
-                                        <div class="col-lg-5 col-md-6 col-sm-6 col-12">
-                                            <a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html" class="wp-post-image">
-                                                <img class="image-cover" src="new1.jpg" tppabs="http://html.physcode.com/uray/imager/product-popular/new1.jpg"
-                                                     alt="product">
-                                            </a>
+                                            @if ($product_sale->price != $product_sale->getFinalPrice() && $product_sale->kind != SC_PRODUCT_GROUP)
+                                          <p class="onsale">Sale</p>
+                                          @elseif($product_sale->type == SC_PRODUCT_NEW)
+                                          <p class="onnew">New</p>
+                                          @elseif($product_sale->type == SC_PRODUCT_HOT)
+                                          <p class="onnew">Hot</p>
+                                          @endif
                                         </div>
                                         <div class=" col-lg-7 col-md-6 col-sm-6 col-12">
                                             <div class="card-body">
-                                                <p class="card-title"><a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">Spa </a></p>
+                                                <p class="card-title"><a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">Beauty </a></p>
                                                 <p class="woocommerce-loop-product__title"><a
                                                         href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html">
-                                                    Baebody eye cream</a></p>
+                                                    {{ $product_sale->name }}</a></p>
 
                                                 <span class="price">
-												<ins>
-													<span class="woocommerce-Price-amount amount">
-														<span class="woocommerce-Price-currencySymbol">$</span>79
-													</span>
-												</ins>
+                                                <ins>
+                                                    <span class="woocommerce-Price-amount amount">
+                                                        {!! $product_sale->showPrice() !!}
+                                                    </span>
+                                                </ins>
                                     </span>
                                                 <div class="content-best-new">
-                                                    <p>Nor again is there anyone who loves or pursues or desires to
-                                                        obtain pain.</p>
+                                                    <p>{{ $product_sale->description }}</p>
                                                 </div>
                                                 <button>ADD TO CARD</button>
                                                 <button><span class="lnr lnr-heart"></span></button>
@@ -408,31 +225,40 @@
                                         </div>
                                     </div>
                                 </div>
+                                @endforeach
+                            </div>
+                            @endif
+
+                            @if(count($products_sale_2) > 0)
+                            <div class="carousel-item active">
+                                @foreach ($products_sale_3 as  $key => $product_sale)
                                 <div class="card col-md-12 col-sm-12 col-12">
                                     <div class="row no-gutters">
                                         <div class="col-lg-5 col-md-6 col-sm-6 col-12">
                                             <a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html" class="wp-post-image">
-                                                <img class="image-cover" src="new2.jpg" tppabs="http://html.physcode.com/uray/imager/product-popular/new2.jpg"
+                                                <img class="image-cover" src="{{ $product_hot->image }}" tppabs="http://html.physcode.com/uray/imager/product-popular/best1.jpg"
                                                      alt="product">
                                             </a>
-                                            <p class="onnew">New</p>
+                                            @if ($product_sale->price != $product_sale->getFinalPrice() && $product_sale->kind != SC_PRODUCT_GROUP)
+                                          <p class="onsale">Sale</p>
+                                          @endif
                                         </div>
-                                        <div class="col-lg-7 col-md-6 col-sm-6 col-12">
+                                        <div class=" col-lg-7 col-md-6 col-sm-6 col-12">
                                             <div class="card-body">
                                                 <p class="card-title"><a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">Beauty </a></p>
                                                 <p class="woocommerce-loop-product__title"><a
                                                         href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html">
-                                                    Eye gel for dark </a></p>
+                                                    {{ $product_sale->name }}</a></p>
+
                                                 <span class="price">
-												<ins>
-													<span class="woocommerce-Price-amount amount">
-														<span class="woocommerce-Price-currencySymbol">$</span>79
-													</span>
-												</ins>
+                                                <ins>
+                                                    <span class="woocommerce-Price-amount amount">
+                                                        {!! $product_sale->showPrice() !!}
+                                                    </span>
+                                                </ins>
                                     </span>
                                                 <div class="content-best-new">
-                                                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                                                        accusantium.</p>
+                                                    <p>{{ $product_sale->description }}</p>
                                                 </div>
                                                 <button>ADD TO CARD</button>
                                                 <button><span class="lnr lnr-heart"></span></button>
@@ -440,7 +266,55 @@
                                         </div>
                                     </div>
                                 </div>
+                                @endforeach
                             </div>
+                            @endif
+
+                            @if(count($products_sale_3) > 0)
+                            <div class="carousel-item active">
+                                @foreach ($products_sale_3 as  $key => $product_sale)
+                                <div class="card col-md-12 col-sm-12 col-12">
+                                    <div class="row no-gutters">
+                                        <div class="col-lg-5 col-md-6 col-sm-6 col-12">
+                                            <a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html" class="wp-post-image">
+                                                <img class="image-cover" src="{{ $product_sale->image }}" tppabs="http://html.physcode.com/uray/imager/product-popular/best1.jpg"
+                                                     alt="product">
+                                            </a>
+                                            @if ($product_sale->price != $product_sale->getFinalPrice() && $product_sale->kind != SC_PRODUCT_GROUP)
+                                          <p class="onsale">Sale</p>
+                                          @elseif($product_sale->type == SC_PRODUCT_NEW)
+                                          <p class="onnew">New</p>
+                                          @elseif($product_sale->type == SC_PRODUCT_HOT)
+                                          <p class="onnew">Hot</p>
+                                          @endif
+                                        </div>
+                                        <div class=" col-lg-7 col-md-6 col-sm-6 col-12">
+                                            <div class="card-body">
+                                                <p class="card-title"><a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">Beauty </a></p>
+                                                <p class="woocommerce-loop-product__title"><a
+                                                        href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html">
+                                                    {{ $product_sale->name }}</a></p>
+
+                                                <span class="price">
+                                                <ins>
+                                                    <span class="woocommerce-Price-amount amount">
+                                                        {!! $product_sale->showPrice() !!}
+                                                    </span>
+                                                </ins>
+                                    </span>
+                                                <div class="content-best-new">
+                                                    <p>{{ $product_sale->description }}</p>
+                                                </div>
+                                                <button>ADD TO CARD</button>
+                                                <button><span class="lnr lnr-heart"></span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endforeach
+                            </div>
+                            @endif
+
                         </div>
                     </div>
                 </div>

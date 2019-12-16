@@ -8,6 +8,7 @@ use App\Models\ShopProductCategory;
 use App\Models\ShopProductDescription;
 use App\Models\ShopProductGroup;
 use App\Models\ShopProductPromotion;
+use Illuminate\Database\Eloquent\Builder;
 use DB;
 use Illuminate\Database\Eloquent\Model;
 
@@ -190,19 +191,25 @@ Get final price
  * @param  string $sortOrder [description]
  * @return [type]            [description]
  */
-    public function getProducts($type = null, $limit = null, $opt = null, $sortBy = null, $sortOrder = 'desc',$offset = null)
+    public function getProducts($type = null, $limit = null, $opt = null, $sortBy = null, $sortOrder = 'desc',$offset = null, $sale = false)
     {
         $lang = $this->lang;
         $query = $this->where($this->getTable() . '.status', 1)
             ->with(['descriptions' => function ($q) use ($lang) {
                 $q->where('lang', $lang);
-            }])
-            ->with('promotionPrice');
+            }]);
 
+            $query = $query->with('promotionPrice');
+        if($sale)
+        {
+            $query = $query->whereHas('promotionPrice', function (Builder $query) {
+                        $query->where('price_promotion', '>', 0);
+                    });
+        }
+            
         if ($type) {
             $query = $query->where('type', $type);
         }
-
                 //Hidden product out of stock
         if (empty(sc_config('product_display_out_of_stock'))) {
             $query = $query->where('stock', '>', 0);

@@ -31,7 +31,7 @@
                                 <div class="card col-md-12 col-sm-12 col-12">
                                     <div class="row no-gutters">
                                         <div class="col-lg-5 col-md-6 col-sm-6 col-12">
-                                            <a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html" class="wp-post-image">
+                                            <a href="{{ $product_hot->getUrl() }}"  class="wp-post-image">
                                                 <img class="image-cover" src="{{ $product_hot->image }}" tppabs="http://html.physcode.com/uray/imager/product-popular/best1.jpg"
                                                      alt="product">
                                             </a>
@@ -47,7 +47,7 @@
                                             <div class="card-body">
                                                 <p class="card-title"><a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">Beauty </a></p>
                                                 <p class="woocommerce-loop-product__title"><a
-                                                        href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html">
+                                                        href="{{ $product_hot->getUrl() }}" >
                                                     {{ $product_hot->name }}</a></p>
 
                                                 <span class="price">
@@ -75,7 +75,7 @@
                                 <div class="card col-md-12 col-sm-12 col-12">
                                     <div class="row no-gutters">
                                         <div class="col-lg-5 col-md-6 col-sm-6 col-12">
-                                            <a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html" class="wp-post-image">
+                                            <a href="{{ $product_hot->getUrl() }}"  class="wp-post-image">
                                                 <img class="image-cover" src="{{ $product_hot->image }}" tppabs="http://html.physcode.com/uray/imager/product-popular/best1.jpg"
                                                      alt="product">
                                             </a>
@@ -91,7 +91,7 @@
                                             <div class="card-body">
                                                 <p class="card-title"><a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">Beauty </a></p>
                                                 <p class="woocommerce-loop-product__title"><a
-                                                        href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html">
+                                                        href="{{ $product_hot->getUrl() }}" >
                                                     {{ $product_hot->name }}</a></p>
 
                                                 <span class="price">
@@ -119,7 +119,7 @@
                                 <div class="card col-md-12 col-sm-12 col-12">
                                     <div class="row no-gutters">
                                         <div class="col-lg-5 col-md-6 col-sm-6 col-12">
-                                            <a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html" class="wp-post-image">
+                                            <a href="{{ $product_hot->getUrl() }}"  class="wp-post-image">
                                                 <img class="image-cover" src="{{ $product_hot->image }}" tppabs="http://html.physcode.com/uray/imager/product-popular/best1.jpg"
                                                      alt="product">
                                             </a>
@@ -135,7 +135,7 @@
                                             <div class="card-body">
                                                 <p class="card-title"><a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">Beauty </a></p>
                                                 <p class="woocommerce-loop-product__title"><a
-                                                        href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html">
+                                                        href="{{ $product_hot->getUrl() }}" >
                                                     {{ $product_hot->name }}</a></p>
 
                                                 <span class="price">
@@ -190,7 +190,7 @@
                                 <div class="card col-md-12 col-sm-12 col-12">
                                     <div class="row no-gutters">
                                         <div class="col-lg-5 col-md-6 col-sm-6 col-12">
-                                            <a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html" class="wp-post-image">
+                                            <a href="{{ $product_sale->getUrl() }}"  class="wp-post-image">
                                                 <img class="image-cover" src="{{ $product_sale->image }}" tppabs="http://html.physcode.com/uray/imager/product-popular/best1.jpg"
                                                      alt="product">
                                             </a>
@@ -206,7 +206,7 @@
                                             <div class="card-body">
                                                 <p class="card-title"><a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">Beauty </a></p>
                                                 <p class="woocommerce-loop-product__title"><a
-                                                        href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html">
+                                                        href="{{ $product_sale->getUrl() }}" >
                                                     {{ $product_sale->name }}</a></p>
 
                                                 <span class="price">
@@ -235,7 +235,7 @@
                                 <div class="card col-md-12 col-sm-12 col-12">
                                     <div class="row no-gutters">
                                         <div class="col-lg-5 col-md-6 col-sm-6 col-12">
-                                            <a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html" class="wp-post-image">
+                                            <a href="{{ $product_sale->getUrl() }}"  class="wp-post-image">
                                                 <img class="image-cover" src="{{ $product_hot->image }}" tppabs="http://html.physcode.com/uray/imager/product-popular/best1.jpg"
                                                      alt="product">
                                             </a>
@@ -247,7 +247,7 @@
                                             <div class="card-body">
                                                 <p class="card-title"><a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">Beauty </a></p>
                                                 <p class="woocommerce-loop-product__title"><a
-                                                        href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html">
+                                                        href="{{ $product_sale->getUrl() }}" >
                                                     {{ $product_sale->name }}</a></p>
 
                                                 <span class="price">
@@ -276,7 +276,7 @@
                                 <div class="card col-md-12 col-sm-12 col-12">
                                     <div class="row no-gutters">
                                         <div class="col-lg-5 col-md-6 col-sm-6 col-12">
-                                            <a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html" class="wp-post-image">
+                                            <a href="{{ $product_sale->getUrl() }}"  class="wp-post-image">
                                                 <img class="image-cover" src="{{ $product_sale->image }}" tppabs="http://html.physcode.com/uray/imager/product-popular/best1.jpg"
                                                      alt="product">
                                             </a>
@@ -292,7 +292,7 @@
                                             <div class="card-body">
                                                 <p class="card-title"><a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">Beauty </a></p>
                                                 <p class="woocommerce-loop-product__title"><a
-                                                        href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html">
+                                                        href="{{ $product_sale->getUrl() }}" >
                                                     {{ $product_sale->name }}</a></p>
 
                                                 <span class="price">

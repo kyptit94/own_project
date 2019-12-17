@@ -1,205 +1,459 @@
 @extends('templates.'.sc_store('template').'.shop_layout')
 
 @section('center')
-          <div class="product-details"><!--product-details-->
-            <div class="col-sm-6">
-
-
-              <div id="product-detail-image" class="carousel slide" data-ride="carousel">
-                    <!-- Wrapper for slides -->
-                    <div class="carousel-inner">
-                      <div class="view-product item active"  data-slide-number="0">
-                        <img src="{{ asset($product->getImage()) }}" alt="">
-                      </div>
-                    @if ($product->images->count())
-                       @foreach ($product->images as $key=>$image)
-                        <div class="view-product item"  data-slide-number="{{ $key + 1 }}">
-                          <img src="{{ asset($image->getImage()) }}" alt="">
+  <div class="title-page"
+     style="background-image: url('Shop_3Columns-title.jpg')/*tpa=http://html.physcode.com/uray/imager/shop/Shop_3Columns-title.jpg*/;background-position: center center;background-size: cover;">
+    <div class="container">
+        <div class="row">
+            <div class=" col-md-6 inner-title-page">
+                <h1>Shop</h1>
+                <p><span>Home</span> / Shop / Product Single</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end title detail-->
+<!--product detail-->
+<div class="container">
+    <div class="product-single-detail">
+        <div class="row product_detail">
+            <div class="col-md-6 col-sm-12 col-12">
+                <div id="slider" class="flexslider">
+                    <ul class="slides">
+                        <li>
+                            <img src="product_detail.jpg" tppabs="http://html.physcode.com/uray/imager/product-detail/product_detail.jpg" alt="">
+                        </li>
+                        <li>
+                            <img src="product_detail.jpg" tppabs="http://html.physcode.com/uray/imager/product-detail/product_detail.jpg" alt="">
+                        </li>
+                        <li>
+                            <img src="product_detail.jpg" tppabs="http://html.physcode.com/uray/imager/product-detail/product_detail.jpg" alt="">
+                        </li>
+                        <li>
+                            <img src="product_detail.jpg" tppabs="http://html.physcode.com/uray/imager/product-detail/product_detail.jpg" alt="">
+                        </li>
+                        <!-- items mirrored twice, total of 12 -->
+                    </ul>
+                </div>
+                <div id="carousel" class="flexslider">
+                    <ul class="slides">
+                        <li>
+                            <img src="product_detail1.jpg" tppabs="http://html.physcode.com/uray/imager/product-detail/product_detail1.jpg" alt="">
+                        </li>
+                        <li>
+                            <img src="product_detail2.jpg" tppabs="http://html.physcode.com/uray/imager/product-detail/product_detail2.jpg" alt="">
+                        </li>
+                        <li>
+                            <img src="product_detail3.jpg" tppabs="http://html.physcode.com/uray/imager/product-detail/product_detail3.jpg" alt="">
+                        </li>
+                        <li>
+                            <img src="product_detail4.jpg" tppabs="http://html.physcode.com/uray/imager/product-detail/product_detail4.jpg" alt="">
+                        </li>
+                        <!-- items mirrored twice, total of 12 -->
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12 col-12 content-product">
+                <h2>Whitening cream | $65</h2>
+                <p><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                        class="fas fa-star"></i><i class="fas fa-star"></i> &nbsp; (2 customer review)</p>
+                <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an
+                    unknown printer took a galley of type and scrambled it to make a type specimen book.
+                    It has survived not only five centuries, but also the leap into electronic </p>
+                <div class="infor-product">
+                    <p><span>Sku: </span>22</p>
+                    <p><span>Category: </span>Cosmetic</p>
+                    <p><span>Tag: </span>Trendy</p>
+                    <p><span>Share: </span>
+                        <a href=""><i class="fab fa-facebook"></i></a>
+                        <a href=""><i class="fab fa-linkedin-in"></i></a>
+                        <a href=""><i class="fab fa-instagram"></i></a></p>
+                </div>
+                <div>
+                    <div class="btn-group">
+                        <button type="button" class="prev btn ">-</button>
+                        <button type="button" class="show-number btn ">1</button>
+                        <button type="button" class="next btn ">+</button>
+                    </div>
+                    <div class="btn-group">
+                        <a href="#" class="btn add-to-cart">ADD TO CART<p><i
+                                class="fas fa-cart-plus"></i></p> </a>
+                    </div>
+                </div>
+                <div class="information">
+                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home"
+                               role="tab" aria-controls="pills-home" aria-selected="true">Description</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile"
+                               role="tab" aria-controls="pills-profile" aria-selected="false">Additional information</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact"
+                               role="tab" aria-controls="pills-contact" aria-selected="false">Reviews (2)</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
+                             aria-labelledby="pills-home-tab">
+                            On the other hand, we denounce with righteous indignation and dislike men
+                            who are so beguiled and demoralized by the charms of pleasure of the moment,
+                            so blinded by desire, that they cannot foresee the pain and trouble that are
+                            bound to ensue; and equal blame belongs to those who fail in their
                         </div>
-                        @endforeach
-                    @endif
+                        <div class="tab-pane fade" id="pills-profile" role="tabpanel"
+                             aria-labelledby="pills-profile-tab">
+                            Berry, sweet, fresh strawberries
+                            <br>
+                            Small capacity is suitable for travel and first time experience
+                        </div>
+                        <div class="tab-pane fade" id="pills-contact" role="tabpanel"
+                             aria-labelledby="pills-contact-tab">
+                            <div class="woocommerce-Reviews" id="reviews">
+                                <h2>2 review for Reframe Your Viewpoints</h2>
+                                <div id="comments">
+                                    <div class="comment-list">
+                                        <div class="comment-item">
+                                            <div class="comment-content">
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                        <img src="item-coment-blog-single1.jpg" tppabs="http://html.physcode.com/uray/imager/blog/item-coment-blog-single1.jpg" alt="customer">
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <div class="comment-body">
+                                                            <div class="comment-author">
+                                                                <span class="author">Emily Valdez</span>
+                                                                <div class="star-rating">
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                </div>
+                                                            </div>
+                                                            <span class="comment-time">March 28, 2020</span>
+                                                            <p>But I must explain to you how all this mistaken idea of
+                                                                denouncing pleasure and praising pain was.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="comment-item">
+                                            <div class="comment-content">
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                        <img src="item-coment-blog-single2.jpg" tppabs="http://html.physcode.com/uray/imager/blog/item-coment-blog-single2.jpg" alt="customer">
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <div class="comment-body">
+                                                            <div class="comment-author">
+                                                                <span class="author">Emma Hayes</span>
+                                                                <div class="star-rating">
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                </div>
+                                                            </div>
+                                                            <span class="comment-time">March 28, 2020</span>
+                                                            <p>Nor again is there anyone who loves or pursues or desires to
+                                                                obtain pain of itself, because it is pain.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="review_form_wrapper">
+                                    <div id="review_form">
+                                        <div id="respond" class="comment-respond">
+                                            <form id="commentform" class="comment-form common-form js-contact-form"
+                                                  action="#" method="POST">
+                                                <p class="comment-notes">
+                                                    <span>Add a review</span>
+                                                    <span id="email-notes">
+                                    Your email address will not be published. Required fields are marked
+                                    <span class="required">*</span>
+                                  </span>
+                                                </p>
+                                                <div class="comment-form-rating">
+                                                    <label>Your rating</label>
+                                                    <p class="stars">
+                                                        <a href="#" class="star-1"><i class="far fa-star"></i></a>
+                                                        <a href="#" class="star-2"><i class="far fa-star"></i></a>
+                                                        <a href="#" class="star-3"><i class="far fa-star"></i></a>
+                                                        <a href="#" class="star-4"><i class="far fa-star"></i></a>
+                                                        <a href="#" class="star-5"><i class="far fa-star"></i></a>
+                                                    </p>
+                                                </div>
+                                                <p class="comment-form-author">
+                                                    <input id="author" name="author" type="text" required=""
+                                                           placeholder="Your Name">
+                                                </p>
+                                                <p class="comment-form-email">
+                                                    <input type="email" required="" pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}"
+                                                           name="email" id="email" placeholder="Your Email">
+                                                </p>
+                                                <p class="comment-form-comment">
+                                                    <textarea id="comment" name="comment" required=""
+                                                              placeholder="Write Your Review..."></textarea>
+                                                </p>
+                                                <p class="form-submit">
+                                                    <input name="submit" type="submit" id="submit"
+                                                           class="submit au-btn btn-small" value="Submit">
+                                                    <span><i class="zmdi zmdi-arrow-right"></i></span>
+                                                </p>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  {{-- </div> --}}
-              </div>
-              @if ($product->images->count())
-                    <!-- Controls -->
-                    <a class="left item-control" style="display: inherit;" href="#product-detail-image" data-slide="prev">
-                    <i class="fa fa-angle-left"></i>
-                    </a>
-                    <a class="right item-control" href="#product-detail-image" data-slide="next">
-                    <i class="fa fa-angle-right"></i>
-                    </a>
-                @endif
-            </div>
-
-        <form id="buy_block" action="{{ route('cart.add') }}" method="post">
-          {{ csrf_field() }}
-          <input type="hidden" name="product_id" id="product-detail-id" value="{{ $product->id }}" />
-            <div class="col-sm-6">
-              <div class="product-information"><!--/product-information-->
-                @if ($product->price != $product->getFinalPrice() && $product->kind != SC_PRODUCT_GROUP)
-                <img src="{{ asset('templates/'.sc_store('template').'/images/home/sale2.png') }}" class="newarrival" alt="" />
-                @elseif($product->type == SC_PRODUCT_NEW)
-                <img src="{{ asset('templates/'.sc_store('template').'/images/home/new2.png') }}" class="newarrival" alt="" />
-                @elseif($product->type == SC_PRODUCT_HOT)
-                <img src="{{ asset('templates/'.sc_store('template').'/images/home/hot2.png') }}" class="newarrival" alt="" />
-                @elseif($product->kind == SC_PRODUCT_BUILD)
-                <img src="{{ asset('templates/'.sc_store('template').'/images/home/bundle2.png') }}" class="newarrival" alt="" />
-                @elseif($product->kind == SC_PRODUCT_GROUP)
-                <img src="{{ asset('templates/'.sc_store('template').'/images/home/group2.png') }}" class="newarrival" alt="" />
-                @endif
-
-                <h2  id="product-detail-name">{{ $product->name }}</h2>
-                <p>SKU: <span  id="product-detail-model">{{ $product->sku }}</span></p>
-                <div id="product-detail-price">
-                  {!! $product->showPrice() !!}
                 </div>
-                <span>
-                  <label>{{ trans('product.quantity') }}:</label>
-                  <input type="number" name="qty" value="1" min="1" />
-                  <button type="submit" class="btn btn-fefault cart">
-                    <i class="fa fa-shopping-cart"></i>
-                    {{trans('front.add_to_cart')}}
-                  </button>
-                </span>
-                <div  id="product-detail-attr">
-                  @if ($product->attributes())
-                  {!! $product->renderAttributeDetails() !!}
-                  @endif
-                </div>
-                <b>{{ trans('product.availability') }}:</b>
-                <span id="product-detail-available">
-                    @if (sc_config('show_date_available') && $product->date_available >= date('Y-m-d H:i:s'))
-                    {{ $product->date_available }}
-                    @elseif($product->stock <=0 && sc_config('product_buy_out_of_stock') == 0)
-                    {{ trans('product.out_stock') }}
-                    @else
-                    {{ trans('product.in_stock') }}
-                    @endif
-                </span>
-                <br>
-                <b>{{ trans('product.brand') }}:</b> <span id="product-detail-brand">{{ empty($product->brand->name)?'None':$product->brand->name }}</span><br>
-
-              @if ($product->kind == SC_PRODUCT_GROUP)
-              <div class="products-group">
-                @php
-                  $groups = $product->groups
-                @endphp
-                <b>{{ trans('product.groups') }}</b>:<br>
-                @foreach ($groups as $group)
-                  <span class="product-group" data-id="{{ $group->product_id }}">{!! sc_image_render($group->product->image) !!}</span>
-                @endforeach
-              </div>
-              @endif
-
-              @if ($product->kind == SC_PRODUCT_BUILD)
-              <div class="products-group">
-                @php
-                  $builds = $product->builds
-                @endphp
-                <b>{{ trans('product.builds') }}</b>:<br>
-                <span class="product-build">{!! sc_image_render($product->image) !!} = </span>
-                @foreach ($builds as $k => $build)
-                  {!! ($k)?'<i class="fa fa-plus" aria-hidden="true"></i>':'' !!} <span class="product-build">{{ $build->quantity }} x <a target="_new" href="{{ $build->product->getUrl() }}">{!! sc_image_render($build->product->image) !!}</a></span>
-                @endforeach
-              </div>
-              @endif
-
-
-              </div><!--/product-information-->
             </div>
-          </div><!--/product-details-->
-        </form>
 
-          <div class="category-tab shop-details-tab"><!--category-tab-->
-            <div class="col-sm-12">
-              <ul class="nav nav-tabs">
-                <li class="active"><a href="#details" data-toggle="tab">{{ trans('product.description') }}</a></li>
-              </ul>
-            </div>
-            <div class="tab-content">
-              <div class="tab-pane fade  active in" id="product-detail-content" >
-                {!! sc_html_render($product->content) !!}
-              </div>
-            </div>
-          </div><!--/category-tab-->
-@if ($productsToCategory->count())
-          <div class="recommended_items"><!--recommended_items-->
-            <h2 class="title text-center">{{ trans('front.recommended_items') }}</h2>
-
-            <div id="recommended-item-carousel" class="carousel slide">
-              <div class="carousel-inner">
-               @foreach ($productsToCategory as  $key => $product_rel)
-                @if ($key % 4 == 0)
-                  <div class="item {{  ($key ==0)?'active':'' }}">
-                @endif
-                  <div class="col-sm-3">
-                    <div class="product-image-wrapper product-single">
-                      <div class="single-products   product-box-{{ $product_rel->id }}">
-                          <div class="productinfo text-center">
-                            <a href="{{ $product_rel->getUrl() }}"><img src="{{ asset($product_rel->getThumb()) }}" alt="{{ $product_rel->name }}" /></a>
-                        {!! $product_rel->showPrice() !!}
-                            <a href="{{ $product_rel->getUrl() }}"><p>{{ $product_rel->name }}</p></a>
-                          </div>
-                          @if ($product_rel->price != $product_rel->getFinalPrice())
-                          <img src="{{ asset('templates/'.sc_store('template').'/images/home/sale.png') }}" class="new" alt="" />
-                          @elseif($product_rel->type == 1)
-                          <img src="{{ asset('templates/'.sc_store('template').'/images/home/new.png') }}" class="new" alt="" />
-                          @endif
-                      </div>
+        </div>
+    </div>
+</div>
+<!--end product detail-->
+<!--product related-->
+<div class="container">
+    <div class="prodcut-related">
+        <div class="title">
+            <h3 class="text-center">Related Products</h3>
+        </div>
+        <div class="row product">
+            <div class="col-md-3 col-sm-6 col-12">
+                <div class="card">
+                    <div class="card-img-top">
+                        <a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html" class="wp-post-image">
+                            <img class="image-cover" src="product.jpg" tppabs="http://html.physcode.com/uray/imager/product/product.jpg" alt="product">
+                        </a>
+                        <p class="onnew">New</p>
+                        <div class="icon-product">
+                            <button class="btn">
+                                <span class="lnr lnr-lock"></span>
+                            </button>
+                            <button type="button" class="btn click-quick-view" data-toggle="modal"
+                                    data-target="#exampleModalCenter">
+                                <span class="lnr lnr-magnifier"></span>
+                            </button>
+                            <button class="btn">
+                                <span class="lnr lnr-heart"></span>
+                            </button>
+                        </div>
                     </div>
-                  </div>
-                @if ($key % 4 == 3)
-                  </div>
-                @endif
-               @endforeach
-              </div>
+                    <div class="card-body">
+                        <p class="card-title"><a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">Beauty </a></p>
+                        <p class="woocommerce-loop-product__title"><a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html">
+                            Cleanser layde</a></p>
+                        <span class="price">
+                        <ins>
+                          <span class="woocommerce-Price-amount amount">
+                            <span class="woocommerce-Price-currencySymbol">$</span>79
+                          </span>
+                        </ins>
+                                    </span>
+                    </div>
+                </div>
+
             </div>
-          </div><!--/recommended_items-->
-@endif
+            <div class="col-md-3 col-sm-6 col-12">
+                <div class="card">
+                    <div class="card-img-top">
+                        <a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html" class="wp-post-image">
+                            <img class="image-cover" src="product2.jpg" tppabs="http://html.physcode.com/uray/imager/product/product2.jpg" alt="product">
+                        </a>
+                        <p class="onsale">Sale</p>
+                        <div class="icon-product">
+                            <button class="btn">
+                                <span class="lnr lnr-lock"></span>
+                            </button>
+                            <button type="button" class="btn click-quick-view" data-toggle="modal"
+                                    data-target="#exampleModalCenter">
+                                <span class="lnr lnr-magnifier"></span>
+                            </button>
+                            <button class="btn">
+                                <span class="lnr lnr-heart"></span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-title"><a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">Spa</a></p>
+                        <p class="woocommerce-loop-product__title"><a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html">
+                            Night cream</a></p>
 
+                        <span class="price">
+                        <del>
+                          <span class="woocommerce-Price-amount amount">
+                            <span class="woocommerce-Price-currencySymbol">$</span>45
 
+                          </span>
+                        </del>
+                        <ins>
+                          <span class="woocommerce-Price-amount amount">
+                            <span class="woocommerce-Price-currencySymbol">$</span>38
+                          </span>
+                        </ins>
+                                    </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-12">
+                <div class="card">
+                    <div class="card-img-top">
+                        <a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html" class="wp-post-image">
+                            <img class="image-cover" src="product3.jpg" tppabs="http://html.physcode.com/uray/imager/product/product3.jpg" alt="product">
+                        </a>
+                        <div class="icon-product">
+                            <button class="btn">
+                                <span class="lnr lnr-lock"></span>
+                            </button>
+                            <button type="button" class="btn click-quick-view" data-toggle="modal"
+                                    data-target="#exampleModalCenter">
+                                <span class="lnr lnr-magnifier"></span>
+                            </button>
+                            <button class="btn">
+                                <span class="lnr lnr-heart"></span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-title"><a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">Make up</a></p>
+                        <p class="woocommerce-loop-product__title"><a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html">
+                            Cleanser layde</a></p>
+                        <span class="price">
+                        <ins>
+                          <span class="woocommerce-Price-amount amount">
+                            <span class="woocommerce-Price-currencySymbol">$</span>56
+                          </span>
+                        </ins>
+                                    </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-12">
+                <div class="card">
+                    <div class="card-img-top">
+                        <a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html" class="wp-post-image">
+                            <img class="image-cover" src="product4.jpg" tppabs="http://html.physcode.com/uray/imager/product/product4.jpg" alt="product">
+                        </a>
+                        <p class="onnew">New</p>
+                        <div class="icon-product">
+                            <button class="btn">
+                                <span class="lnr lnr-lock"></span>
+                            </button>
+                            <button type="button" class="btn click-quick-view" data-toggle="modal"
+                                    data-target="#exampleModalCenter">
+                                <span class="lnr lnr-magnifier"></span>
+                            </button>
+                            <button class="btn">
+                                <span class="lnr lnr-heart"></span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-title"><a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">Beauty </a></p>
+                        <p class="woocommerce-loop-product__title"><a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html">
+                            Moisturizing cream</a></p>
+                        <span class="price">
+                        <ins>
+                          <span class="woocommerce-Price-amount amount">
+                            <span class="woocommerce-Price-currencySymbol">$</span>87
+                          </span>
+                        </ins>
+                                    </span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content container">
+                        <div class="product-single-quick-view">
+                            <div class="row product_detail">
+                                <div class="col-md-6 col-sm-12 col-12">
+                                    <div class="flex-quick-view">
+                                        <div id="flex-slider" class="flexslider">
+                                            <ul class="slides">
+                                                <li>
+                                                    <img src="product_detail.jpg" tppabs="http://html.physcode.com/uray/imager/product-detail/product_detail.jpg" alt="">
+                                                </li>
+                                                <li>
+                                                    <img src="product_detail.jpg" tppabs="http://html.physcode.com/uray/imager/product-detail/product_detail.jpg" alt="">
+                                                </li>
+                                                <li>
+                                                    <img src="product_detail.jpg" tppabs="http://html.physcode.com/uray/imager/product-detail/product_detail.jpg" alt="">
+                                                </li>
+                                                <li>
+                                                    <img src="product_detail.jpg" tppabs="http://html.physcode.com/uray/imager/product-detail/product_detail.jpg" alt="">
+                                                </li>
+                                                <!-- items mirrored twice, total of 12 -->
+                                            </ul>
+                                        </div>
+                                        <div id="flex-carousel" class="flexslider">
+                                            <ul class="slides">
+                                                <li>
+                                                    <img src="product_detail1.jpg" tppabs="http://html.physcode.com/uray/imager/product-detail/product_detail1.jpg" alt="">
+                                                </li>
+                                                <li>
+                                                    <img src="product_detail2.jpg" tppabs="http://html.physcode.com/uray/imager/product-detail/product_detail2.jpg" alt="">
+                                                </li>
+                                                <li>
+                                                    <img src="product_detail3.jpg" tppabs="http://html.physcode.com/uray/imager/product-detail/product_detail3.jpg" alt="">
+                                                </li>
+                                                <li>
+                                                    <img src="product_detail4.jpg" tppabs="http://html.physcode.com/uray/imager/product-detail/product_detail4.jpg" alt="">
+                                                </li>
+                                                <!-- items mirrored twice, total of 12 -->
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12 col-12 content-product">
+                                    <h2>Whitening cream | $65</h2>
+                                    <p><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                                            class="fas fa-star"></i><i class="fas fa-star"></i> &nbsp; (2 customer
+                                        review)</p>
+                                    <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                                        when an
+                                        unknown printer took a galley of type and scrambled it to make a type specimen
+                                        book.
+                                        It has survived not only five centuries, but also the leap into electronic </p>
+                                    <div class="infor-product">
+                                        <p><span>Sku: </span>22</p>
+                                        <p><span>Category: </span>Cosmetic</p>
+                                        <p><span>Tag: </span>Trendy</p>
+                                        <p><span>Share: </span>
+                                            <a href=""><i class="fab fa-facebook"></i></a>
+                                            <a href=""><i class="fab fa-linkedin-in"></i></a>
+                                            <a href=""><i class="fab fa-instagram"></i></a></p>
+                                    </div>
+                                    <div>
+                                        <div class="btn-group">
+                                            <button type="button" class="prev btn ">-</button>
+                                            <button type="button" class="show-number btn ">1</button>
+                                            <button type="button" class="next btn ">+</button>
+                                        </div>
+                                        <div class="btn-group">
+                                            <a href="#" class="btn add-to-cart">ADD TO CART<p><i
+                                                    class="fas fa-cart-plus"></i></p> </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="lnr lnr-cross close-quick-view" data-dismiss="modal"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
 @endsection
-
-@section('breadcrumb')
-@endsection
-
-@push('styles')
-
-@endpush
-
-@push('scripts')
-<script type="text/javascript">
-  $('.product-group').click(function(event) {
-    if($(this).hasClass('active')){
-      return;
-    }
-    $('.product-group').removeClass('active');
-    $(this).addClass('active');
-    var id = $(this).data("id");
-      $.ajax({
-          url:'{{ route("product.info") }}',
-          type:'POST',
-          dataType:'json',
-          data:{id:id,"_token": "{{ csrf_token() }}"},
-          beforeSend: function(){
-              $('#loading').show();
-          },
-          success: function(data){
-            console.log(data);
-            $('#product-detail-name').html(data.name);
-            $('#product-detail-model').html(data.sku);
-            $('#product-detail-price').html(data.showPrice);
-            $('#product-detail-brand').html(data.brand_name);
-            $('#product-detail-image').html(data.showImages);
-            $('#product-detail-available').html(data.availability);
-            $('#product-detail-id').val(data.id);
-            $('#product-detail-image').carousel();
-            $('#loading').hide();
-            window.history.pushState("", "", data.url);            
-          }
-      });
-
-  });
-</script>
-@endpush

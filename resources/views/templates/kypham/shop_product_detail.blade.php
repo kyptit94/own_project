@@ -20,54 +20,52 @@
             <div class="col-md-6 col-sm-12 col-12">
                 <div id="slider" class="flexslider">
                     <ul class="slides">
+                      @if ($product->images->count())
+                       @foreach ($product->images as $key=>$image)
                         <li>
-                            <img src="product_detail.jpg" tppabs="http://html.physcode.com/uray/imager/product-detail/product_detail.jpg" alt="">
-                        </li>
-                        <li>
-                            <img src="product_detail.jpg" tppabs="http://html.physcode.com/uray/imager/product-detail/product_detail.jpg" alt="">
-                        </li>
-                        <li>
-                            <img src="product_detail.jpg" tppabs="http://html.physcode.com/uray/imager/product-detail/product_detail.jpg" alt="">
-                        </li>
-                        <li>
-                            <img src="product_detail.jpg" tppabs="http://html.physcode.com/uray/imager/product-detail/product_detail.jpg" alt="">
+                            <img src="{{$image->image}}" alt="">
                         </li>
                         <!-- items mirrored twice, total of 12 -->
+                      @endforeach
+                    @endif
                     </ul>
                 </div>
                 <div id="carousel" class="flexslider">
                     <ul class="slides">
+                        @if ($product->images->count())
+                       @foreach ($product->images as $key=>$image)
                         <li>
-                            <img src="product_detail1.jpg" tppabs="http://html.physcode.com/uray/imager/product-detail/product_detail1.jpg" alt="">
+                            <img src="{{$image->image}}" alt="">
                         </li>
-                        <li>
-                            <img src="product_detail2.jpg" tppabs="http://html.physcode.com/uray/imager/product-detail/product_detail2.jpg" alt="">
-                        </li>
-                        <li>
-                            <img src="product_detail3.jpg" tppabs="http://html.physcode.com/uray/imager/product-detail/product_detail3.jpg" alt="">
-                        </li>
-                        <li>
-                            <img src="product_detail4.jpg" tppabs="http://html.physcode.com/uray/imager/product-detail/product_detail4.jpg" alt="">
-                        </li>
+                        <!-- items mirrored twice, total of 12 -->
+                        @endforeach
+                      @endif
                         <!-- items mirrored twice, total of 12 -->
                     </ul>
                 </div>
             </div>
             <div class="col-md-6 col-sm-12 col-12 content-product">
-                <h2>Whitening cream | $65</h2>
+                <h2>{{$product->name}} | {!! $product->showPrice() !!}</h2>
                 <p><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
                         class="fas fa-star"></i><i class="fas fa-star"></i> &nbsp; (2 customer review)</p>
-                <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an
-                    unknown printer took a galley of type and scrambled it to make a type specimen book.
-                    It has survived not only five centuries, but also the leap into electronic </p>
+                <p>{{$product->description}} </p>
                 <div class="infor-product">
-                    <p><span>Sku: </span>22</p>
-                    <p><span>Category: </span>Cosmetic</p>
-                    <p><span>Tag: </span>Trendy</p>
+                    <p><span>Sku: </span>{{$product->sku}}</p>
+                    <p><span>{{ trans('product.brand') }}</span> {{ empty($product->brand->name)?'Không xác định':$product->brand->name }}</p>
+                    <p><span>Danh mục: </span>@foreach ($product->categories as $key=>$category) <a href="{{$category->getUrl()}}">{{$category->name}}</a> @endforeach</p>
+                    <p><span>Tình trạng: </span>@if (sc_config('show_date_available') && $product->date_available >= date('Y-m-d H:i:s'))
+                    {{ $product->date_available }}
+                    @elseif($product->stock <=0 && sc_config('product_buy_out_of_stock') == 0)
+                    {{ trans('product.out_stock') }}
+                    @else
+                    {{ trans('product.in_stock') }}
+                    @endif</p>
+
                     <p><span>Share: </span>
                         <a href=""><i class="fab fa-facebook"></i></a>
                         <a href=""><i class="fab fa-linkedin-in"></i></a>
                         <a href=""><i class="fab fa-instagram"></i></a></p>
+
                 </div>
                 <div>
                     <div class="btn-group">
@@ -80,34 +78,30 @@
                                 class="fas fa-cart-plus"></i></p> </a>
                     </div>
                 </div>
+                <div>
+                  <div  id="product-detail-attr">
+                  @if ($product->attributes())
+                  {!! $product->renderAttributeDetails() !!}
+                  @endif
+                </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12 col-12 content-product">
                 <div class="information">
                     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home"
-                               role="tab" aria-controls="pills-home" aria-selected="true">Description</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile"
-                               role="tab" aria-controls="pills-profile" aria-selected="false">Additional information</a>
+                               role="tab" aria-controls="pills-home" aria-selected="true">Mô tả</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact"
-                               role="tab" aria-controls="pills-contact" aria-selected="false">Reviews (2)</a>
+                               role="tab" aria-controls="pills-contact" aria-selected="false">Đánh giá</a>
                         </li>
                     </ul>
                     <div class="tab-content" id="pills-tabContent">
                         <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
                              aria-labelledby="pills-home-tab">
-                            On the other hand, we denounce with righteous indignation and dislike men
-                            who are so beguiled and demoralized by the charms of pleasure of the moment,
-                            so blinded by desire, that they cannot foresee the pain and trouble that are
-                            bound to ensue; and equal blame belongs to those who fail in their
-                        </div>
-                        <div class="tab-pane fade" id="pills-profile" role="tabpanel"
-                             aria-labelledby="pills-profile-tab">
-                            Berry, sweet, fresh strawberries
-                            <br>
-                            Small capacity is suitable for travel and first time experience
+                            {!!$product->content!!}
                         </div>
                         <div class="tab-pane fade" id="pills-contact" role="tabpanel"
                              aria-labelledby="pills-contact-tab">
@@ -217,7 +211,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
@@ -426,7 +419,7 @@
                                         book.
                                         It has survived not only five centuries, but also the leap into electronic </p>
                                     <div class="infor-product">
-                                        <p><span>Sku: </span>22</p>
+                                        <p><span>Sku: </span>{{$product->sku}}</p>
                                         <p><span>Category: </span>Cosmetic</p>
                                         <p><span>Tag: </span>Trendy</p>
                                         <p><span>Share: </span>

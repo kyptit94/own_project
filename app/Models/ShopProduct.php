@@ -177,7 +177,9 @@ Get final price
     {
         $product = $this->where('id', $id)
             ->with('images')
-            ->with('promotionPrice');
+            ->with('promotionPrice')
+            ->with('categories')
+            ;
         $product = $product->first();
         return $product;
     }

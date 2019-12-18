@@ -13,7 +13,7 @@
             <div class=" header-menu-desktop d-flex justify-content-between">
                 <div>
                     <div class="logo">
-                        <a href="index.html" tppabs="http://html.physcode.com/uray/index.html"><img src="Logo.png" tppabs="http://html.physcode.com/uray/imager/home/Logo.png" alt=""></a>
+                        <a href="{{ route('home') }}" tppabs="http://html.physcode.com/uray/index.html"><img src="{{ asset(sc_store('logo')) }}" tppabs="http://html.physcode.com/uray/imager/home/Logo.png" alt=""></a>
                     </div>
                 </div>
                 <div>

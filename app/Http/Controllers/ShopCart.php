@@ -218,6 +218,7 @@ class ShopCart extends GeneralController
         $product_id = $data['product_id'];
         $form_attr = $data['form_attr'] ?? null;
         $qty = $data['qty'];
+        $type = isset($data['type'])?$data['type']:'view';
         $product = ShopProduct::find($product_id);
         if ($product->allowSale()) {
             $options = array();

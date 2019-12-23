@@ -9,7 +9,7 @@
                             <div class="row">
                                 <div class="col-lg-6 col-md-8 col-sm-10 col-10 content-slide">
                                     {!!$banner->html!!}
-                                    <a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">view now</a>
+                                    <a href="{{$banner->url}}" >view now</a>
                                 </div>
                             </div>
                         </div>

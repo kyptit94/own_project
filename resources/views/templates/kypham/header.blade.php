@@ -1,6 +1,7 @@
 
 <!--header-->
 <!--header desktop-->
+
 <div class="header">
     <div class="container-fluid search-header">
         <form>
@@ -82,57 +83,37 @@
                                 <img src="bag-2.png" tppabs="http://html.physcode.com/uray/imager/home/bag-2.png" alt=""
                                      style="width: 16px;height: 22px;margin-top: -10px;">
                                 <div class="number-cart">
-                                    2
+                                    {{ $carts['count'] }}
                                 </div>
                             </a>
                                 <div class="widget_shopping_cart">
                                     <div class="widget_shopping_cart_content">
                                         <ul class="woocommerce-mini-cart cart_list product_list_widget ">
+                                            @foreach($carts['items'] as $cart)
                                             <li class="woocommerce-mini-cart-item mini_cart_item clearfix">
                                                 <a class="product-image" href="#">
-                                                    <img src="cart-home1.jpg" tppabs="http://html.physcode.com/uray/imager/home/cart-home1.jpg" alt="cart-1">
+                                                    <img src="{{$cart['image']}}" height="81" width="70" alt="cart-1">
                                                 </a>
-                                                <a class="product-title" href="#">Skin recreation</a>
+                                                <a class="product-title" href="#">{!!\Illuminate\Support\Str::limit($cart['name'],15,'...')!!}</a>
 
                                                 <span class="woocommerce-Price-amount amount">
-														<span class="woocommerce-Price-currencySymbol">$</span>
-														56
+														{!!$cart['showPrice']!!}
                                                 </span>
                                                 <span class="quantity">
-													Qty: 1
+													Số lượng: {{$cart['qty']}}
 												</span>
-                                                <a href="#" class="remove">
-                                                    <span class="lnr lnr-cross"></span>
-                                                </a>
                                             </li>
-                                            <li class="woocommerce-mini-cart-item mini_cart_item clearfix">
-                                                <a class="product-image" href="#">
-                                                    <img src="cart-home2.jpg" tppabs="http://html.physcode.com/uray/imager/home/cart-home2.jpg" alt="cart-2">
-                                                </a>
-                                                <a class="product-title" href="#">Face cream</a>
-
-                                                <span class="woocommerce-Price-amount amount">
-														<span class="woocommerce-Price-currencySymbol">$</span>
-														48
-													</span>
-                                                <span class="quantity">
-													Qty: 2
-												</span>
-                                                <a href="#" class="remove">
-                                                    <span class="lnr lnr-cross"></span>
-                                                </a>
-                                            </li>
+                                            @endforeach
                                         </ul>
                                         <p class="woocommerce-mini-cart__total total">
-                                            <span>Order Total:</span>
+                                            <span>Tổng tiền:</span>
                                             <span class="woocommerce-Price-amount amount">
-												<span class="woocommerce-Price-currencySymbol">$</span>
-												200
+												{{$carts['subtotal']}}
 											</span>
                                         </p>
                                         <p class="woocommerce-mini-cart__buttons buttons">
-                                            <a href="#" class="button wc-forward au-btn btn-small">VIEW CART &
-                                                CHECKOUT</a>
+                                            <a href="{{ route('cart') }}" class="button wc-forward au-btn btn-small">XEM GIỎ HÀNG &
+                                                THANH TOÁN</a>
                                         </p>
                                     </div>
                                 </div>
@@ -180,8 +161,8 @@
 <!--header mobile-->
 <div class="header">
     <div class="container-fluid search-header">
-        <form>
-            <input type="text" placeholder="Search">
+        <form method="get" action="{{ route('search') }}">
+            <input type="text" name="keyword" placeholder="Tìm kiếm">
             <span class="close-search">X</span>
         </form>
     </div>
@@ -201,57 +182,36 @@
                                 <img src="bag-2.png" tppabs="http://html.physcode.com/uray/imager/home/bag-2.png" alt=""
                                      style="width: 16px;height: 22px;margin-top: -10px;">
                                 <div class="number-cart">
-                                    2
+                                    {{ $carts['count'] }}
                                 </div>
                             </a>
                                 <div class="widget_shopping_cart">
                                     <div class="widget_shopping_cart_content">
                                         <ul class="woocommerce-mini-cart cart_list product_list_widget ">
+                                            @foreach($carts['items'] as $cart)
                                             <li class="woocommerce-mini-cart-item mini_cart_item clearfix">
                                                 <a class="product-image" href="#">
-                                                    <img src="cart-home1.jpg" tppabs="http://html.physcode.com/uray/imager/home/cart-home1.jpg" alt="cart-1">
+                                                    <img src="{{$cart['image']}}" height="81" width="70" alt="cart-1">
                                                 </a>
-                                                <a class="product-title" href="#">Skin recreation</a>
+                                                <a class="product-title" href="#">{!!\Illuminate\Support\Str::limit($cart['name'],15,'...')!!}</a>
 
                                                 <span class="woocommerce-Price-amount amount">
-														<span class="woocommerce-Price-currencySymbol">$</span>
-														56
+														{!!$cart['showPrice']!!}
                                                 </span>
                                                 <span class="quantity">
-													Qty: 1
+													Số lượng: {{$cart['qty']}}
 												</span>
-                                                <a href="#" class="remove">
-                                                    <span class="lnr lnr-cross"></span>
-                                                </a>
                                             </li>
-                                            <li class="woocommerce-mini-cart-item mini_cart_item clearfix">
-                                                <a class="product-image" href="#">
-                                                    <img src="cart-home2.jpg" tppabs="http://html.physcode.com/uray/imager/home/cart-home2.jpg" alt="cart-2">
-                                                </a>
-                                                <a class="product-title" href="#">Face cream</a>
-
-                                                <span class="woocommerce-Price-amount amount">
-														<span class="woocommerce-Price-currencySymbol">$</span>
-														48
-													</span>
-                                                <span class="quantity">
-													Qty: 2
-												</span>
-                                                <a href="#" class="remove">
-                                                    <span class="lnr lnr-cross"></span>
-                                                </a>
-                                            </li>
+                                            @endforeach
                                         </ul>
                                         <p class="woocommerce-mini-cart__total total">
-                                            <span>Order Total:</span>
+                                            <span>Tổng tiền:</span>
                                             <span class="woocommerce-Price-amount amount">
-												<span class="woocommerce-Price-currencySymbol">$</span>
-												200
+												{{$carts['subtotal']}}
 											</span>
                                         </p>
                                         <p class="woocommerce-mini-cart__buttons buttons">
-                                            <a href="#" class="button wc-forward au-btn btn-small">VIEW CART &
-                                                CHECKOUT</a>
+                                            <a href="#" class="button wc-forward au-btn btn-small">XEM GIỎ HÀNG & THANH TOÁN</a>
                                         </p>
                                     </div>
                                 </div>

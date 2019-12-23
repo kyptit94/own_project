@@ -2,29 +2,39 @@
     $productsSpecial = (new \App\Models\ShopProduct)->getProductsSpecial($limit = 1, $random = true)
   @endphp
   @if (!empty($productsSpecial))
-              <div class="brands_products"><!--product special-->
-                <h2>{{ trans('front.products_special') }}</h2>
-                <div class="products-name">
-                  <ul class="nav nav-pills nav-stacked">
+<style type="text/css">
+  .special .new-price {
+    font-size: 12px;
+    padding: 4px;
+  }
+  .special .old-price {
+    font-size: 12px;
+    padding: 4px;
+  }
+</style>
+<div class="popular-item">
+                <h2>Hàng bán chạy</h2>
+                  
                     @foreach ($productsSpecial as $key => $productSpecial)
-                      <li>
-                        <div class="product-image-wrapper product-single">
-                          <div class="single-products product-box-{{ $key }}">
-                              <div class="productinfo text-center">
-                                <a href="{{ $productSpecial->getUrl() }}"><img src="{{ asset($productSpecial->getThumb()) }}" alt="{{ $productSpecial->name }}" /></a>
-                                {!! $productSpecial->showPrice() !!}
-                                <a href="{{ $productSpecial->getUrl() }}"><p>{{ $productSpecial->name }}</p></a>
-                              </div>
-                          @if ($productSpecial->price != $productSpecial->getFinalPrice())
-                          <img src="{{ asset('templates/'.sc_store('template').'/images/home/sale.png') }}" class="new" alt="" />
-                          @elseif($productSpecial->type == SC_PRODUCT_NEW)
-                          <img src="{{ asset('templates/'.sc_store('template').'/images/home/new.png') }}" class="new" alt="" />
-                          @endif
-                          </div>
+                      <div class="card">
+                            <div class="row no-gutters">
+                                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-6 col-6">
+                                   <a href="{!!$productSpecial->getUrl()!!}" "><img src="{{$productSpecial->image}}" width="85" height="59" class="card-img" alt="..."></a>
+                                </div>
+                                <div class="col-xl-8 col-lg-8 col-md-12 col-sm-6 col-6">
+                                    <div class="card-body">
+                                        <h5 class="card-title woocommerce-loop-product__title"><a href="{!!$productSpecial->getUrl()!!}" >{!!\Illuminate\Support\Str::limit($productSpecial->name,30,'...')!!}</a></h5>
+                                        <p class="card-text price">
+                                            <ins>
+                          <span class="special woocommerce-Price-amount amount">
+                            {!! $productSpecial->showPrice() !!}
+                          </span>
+                                            </ins>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                      </li>
                     @endforeach
-                  </ul>
-                </div>
-              </div><!--/product special-->
+  </div>
   @endif

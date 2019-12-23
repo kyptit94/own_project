@@ -4,7 +4,6 @@
 <section>
     <div class="container">
       <div class="row">
-<h2 class="title text-center">{{ $title }}</h2>
 @if (count($cart) ==0)
     <div class="col-md-12 text-danger">
         Cart empty!
@@ -67,7 +66,7 @@
         <td><input style="width: 70px;" type="number" data-id="{{ $item->id }}" data-rowid="{{$item->rowId}}" onChange="updateCart($(this));" class="item-qty" name="qty-{{$item->id}}" value="{{$item->qty}}"><span class="text-danger item-qty-{{$item->id}}" style="display: none;"></span></td>
         <td align="right">{{sc_currency_render($item->subtotal)}}</td>
         <td>
-            <a onClick="return confirm('Confirm?')" title="Remove Item" alt="Remove Item" class="cart_quantity_delete" href="{{route("cart.remove",['id'=>$item->rowId])}}"><i class="fa fa-times"></i></a>
+            <a onClick="return confirm('Bạn có chắc muốn xóa sản phẩm này?')" title="Remove Item" alt="Remove Item" class="cart_quantity_delete" href="{{route("cart.remove",['id'=>$item->rowId])}}"><i class="fa fa-times"></i></a>
         </td>
     </tr>
     @endforeach
@@ -79,18 +78,18 @@
                 <button class="btn btn-default" type="button" style="cursor: pointer;padding:10px 30px" onClick="location.href='{{ route('home') }}'"><i class="fa fa-arrow-left"></i>{{ trans('cart.back_to_shop') }}</button>
                 </div>
                  <div class="pull-right">
-                <a onClick="return confirm('Confirm ?')" href="{{route('cart.clear')}}"><button class="btn" type="button" style="cursor: pointer;padding:10px 30px">{{ trans('cart.remove_all') }}</button></a>
+                <a onClick="return confirm('Bạn có chắc muốn xóa tất cả sản phẩm này ?')" href="{{route('cart.clear')}}"><button class="btn btn-danger" type="button" style="cursor: pointer;padding:10px 30px">{{ trans('cart.remove_all') }}</button></a>
                 </div>
             </td>
         </tr>
     </tfoot>
   </table>
   </div>
-<form class="shipping_address" id="form-order" role="form" method="POST" action="{{ route('checkout') }}">
+<form class="shipping_address" style="width: 100%" id="form-order" role="form" method="POST" action="{{ route('checkout') }}">
 <div class="row">
     <div class="col-md-6">
             @csrf
-            <table class="table  table-bordered table-responsive">
+            <table class="table table-responsive">
                 <tr>
                 <td class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
                     <label for="phone" class="control-label"><i class="fa fa-user"></i> {{ trans('cart.first_name') }}:</label> <input name="first_name" type="text" placeholder="{{ trans('cart.first_name') }}" value="{{(old('first_name'))?old('first_name'):$shippingAddress['first_name']}}">
@@ -119,26 +118,7 @@
                             @endif
                     </td>
                 </tr>
-
-                <tr>
-                    <td colspan="2" class="form-group{{ $errors->has('country') ? ' has-error' : '' }}">
-                        <label  for="country" class="control-label"><i class="fa fa-dribbble" aria-hidden="true"></i> {{ trans('cart.country') }}:</label>
-                        @php
-                            $ct = (old('country'))?old('country'):$shippingAddress['country'];
-                        @endphp
-                        <select class="form-control country " style="width: 100%;" name="country" >
-                            <option value="">__{{ trans('cart.country') }}__</option>
-                            @foreach ($countries as $k => $v)
-                                <option value="{{ $k }}" {{ ($ct ==$k) ? 'selected':'' }}>{{ $v }}</option>
-                            @endforeach
-                        </select>
-                        @if ($errors->has('country'))
-                            <span class="help-block">
-                                {{ $errors->first('country') }}
-                            </span>
-                        @endif
-                    </td>
-                </tr>
+                <input type="hidden" name="country" value="VN">
 
 
                 <tr>
@@ -277,117 +257,124 @@
 @endsection
 
 @section('breadcrumb')
-    <div class="breadcrumbs">
-        <ol class="breadcrumb">
-          <li><a href="{{ route('home') }}">Home</a></li>
-          <li class="active">{{ $title }}</li>
-        </ol>
-      </div>
+<div class="title-page"
+     style="background-image: url('Shop_3Columns-title.jpg')/*tpa=http://html.physcode.com/uray/imager/shop/Shop_3Columns-title.jpg*/;background-position: center center;background-size: cover;
+        margin-bottom: 20px; 
+     ">
+    <div class="container">
+        <div class="row">
+            <div class=" col-md-6 inner-title-page">
+                <h1>{{ $title }}</h1>
+                <p><span><a href="{{ route('home') }}">Home</a></span> / {{ $title }}</p>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 
 @push('scripts')
 <script type="text/javascript">
-    function updateCart(obj){
-        var new_qty = obj.val();
-        var rowid = obj.data('rowid');
-        var id = obj.data('id');
-            $.ajax({
-            url: '{{ route('cart.update') }}',
-            type: 'POST',
-            dataType: 'json',
-            async: false,
-            cache: false,
-            data: {
-                id: id,
-                rowId: rowid,
-                new_qty: new_qty,
-                _token:'{{ csrf_token() }}'},
-            success: function(data){
-                error= parseInt(data.error);
-                if(error ===0)
-                {
-                        window.location.replace(location.href);
-                }else{
-                    $('.item-qty-'+id).css('display','block').html(data.msg);
-                }
-
-                }
-        });
-    }
-
-$('#submit-order').click(function(){
-    $('#form-order').submit();
-    $(this).prop('disabled',true);
-});
-
-@if ($extensionDiscount)
-    $('#coupon-button').click(function() {
-     var coupon = $('#coupon-value').val();
-        if(coupon==''){
-            $('#coupon-group').addClass('has-error');
-            $('.coupon-msg').html('{{ trans('cart.coupon_empty') }}').addClass('text-danger').show();
-        }else{
-        $('#coupon-button').button('loading');
-        setTimeout(function() {
-            $.ajax({
-                url: '{{ route('useDiscount') }}',
+        function updateCart(obj){
+            var new_qty = obj.val();
+            var rowid = obj.data('rowid');
+            var id = obj.data('id');
+                $.ajax({
+                url: '{{ route('cart.update') }}',
                 type: 'POST',
                 dataType: 'json',
+                async: false,
+                cache: false,
                 data: {
-                    code: coupon,
-                    uID: {{ $uID }},
-                    _token: "{{ csrf_token() }}",
-                },
-            })
-            .done(function(result) {
-                    $('#coupon-value').val('');
-                    $('.coupon-msg').removeClass('text-danger');
-                    $('.coupon-msg').removeClass('text-success');
-                    $('#coupon-group').removeClass('has-error');
-                    $('.coupon-msg').hide();
-                if(result.error ==1){
-                    $('#coupon-group').addClass('has-error');
-                    $('.coupon-msg').html(result.msg).addClass('text-danger').show();
-                }else{
-                    $('#removeCoupon').show();
-                    $('.coupon-msg').html(result.msg).addClass('text-success').show();
-                    $('.showTotal').remove();
-                    $('#showTotal').prepend(result.html);
-                }
-            })
-            .fail(function() {
-                console.log("error");
-            })
-           $('#coupon-button').button('reset');
-       }, 2000);
+                    id: id,
+                    rowId: rowid,
+                    new_qty: new_qty,
+                    _token:'{{ csrf_token() }}'},
+                success: function(data){
+                    error= parseInt(data.error);
+                    if(error ===0)
+                    {
+                            window.location.replace(location.href);
+                    }else{
+                        $('.item-qty-'+id).css('display','block').html(data.msg);
+                    }
+
+                    }
+            });
         }
 
+    $('#submit-order').click(function(){
+        $('#form-order').submit();
+        $(this).prop('disabled',true);
     });
-    $('#removeCoupon').click(function() {
-            $.ajax({
-                url: '{{ route('removeDiscount') }}',
-                type: 'POST',
-                dataType: 'json',
-                data: {
-                    _token: "{{ csrf_token() }}",
-                },
-            })
-            .done(function(result) {
-                    $('#removeCoupon').hide();
-                    $('#coupon-value').val('');
-                    $('.coupon-msg').removeClass('text-danger');
-                    $('.coupon-msg').removeClass('text-success');
-                    $('.coupon-msg').hide();
-                    $('.showTotal').remove();
-                    $('#showTotal').prepend(result.html);
-            })
-            .fail(function() {
-                console.log("error");
-            })
-            // .always(function() {
-            //     console.log("complete");
-            // });
-    });
+
+    @if ($extensionDiscount)
+        $('#coupon-button').click(function() {
+         var coupon = $('#coupon-value').val();
+            if(coupon==''){
+                $('#coupon-group').addClass('has-error');
+                $('.coupon-msg').html('{{ trans('cart.coupon_empty') }}').addClass('text-danger').show();
+            }else{
+            $('#coupon-button').button('loading');
+            setTimeout(function() {
+                $.ajax({
+                    url: '{{ route('useDiscount') }}',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        code: coupon,
+                        uID: {{ $uID }},
+                        _token: "{{ csrf_token() }}",
+                    },
+                })
+                .done(function(result) {
+                        $('#coupon-value').val('');
+                        $('.coupon-msg').removeClass('text-danger');
+                        $('.coupon-msg').removeClass('text-success');
+                        $('#coupon-group').removeClass('has-error');
+                        $('.coupon-msg').hide();
+                    if(result.error ==1){
+                        $('#coupon-group').addClass('has-error');
+                        $('.coupon-msg').html(result.msg).addClass('text-danger').show();
+                    }else{
+                        $('#removeCoupon').show();
+                        $('.coupon-msg').html(result.msg).addClass('text-success').show();
+                        $('.showTotal').remove();
+                        $('#showTotal').prepend(result.html);
+                    }
+                })
+                .fail(function() {
+                    console.log("error");
+                })
+               $('#coupon-button').button('reset');
+           }, 2000);
+            }
+
+        });
+        $('#removeCoupon').click(function() {
+                $.ajax({
+                    url: '{{ route('removeDiscount') }}',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                    },
+                })
+                .done(function(result) {
+                        $('#removeCoupon').hide();
+                        $('#coupon-value').val('');
+                        $('.coupon-msg').removeClass('text-danger');
+                        $('.coupon-msg').removeClass('text-success');
+                        $('.coupon-msg').hide();
+                        $('.showTotal').remove();
+                        $('#showTotal').prepend(result.html);
+                })
+                .fail(function() {
+                    console.log("error");
+                })
+                // .always(function() {
+                //     console.log("complete");
+                // });
+        });
 @endif
 
 </script>

@@ -887,37 +887,6 @@ h2.title {
      height: 310px;
 }
 
-
-.add-to-cart {
-  background:#F5F5ED;
-  border: 0 none;
-  border-radius: 0;
-  color: #696763;
-  font-family: 'Roboto', sans-serif;
-  font-size: 15px;
-  margin-bottom: 25px;
-}
-
-.add-to-cart:hover {
-  background: #FE980F;
-  border: 0 none;
-  border-radius: 0;
-  color: #FFFFFF;
-}
-
-.add-to{
-  margin-bottom: 10px;
-}
-
-.add-to-cart i{
-	margin-right:5px;
-}
-
-.add-to-cart:hover {
-  background: #FE980F;
-  color: #FFFFFF;
-}
-
 .choose {
   border-top: 1px solid #F7F7F0;
 }
@@ -950,6 +919,10 @@ h2.title {
   margin: 0 0 30px;
   padding: 0;
   width: 100%;
+}
+
+.content-product {
+  padding: 20px;
 }
 
 .category-tab ul li a {
@@ -1700,7 +1673,7 @@ h2.title {
 }
 
 .user_info input, select, textarea {
-  background: #F0F0E9;
+  background: #b1cecc;
   border:0;
   color: #696763;
   padding: 5px;
@@ -2467,7 +2440,7 @@ h2.title {
 }
 
 .new-price{
-  color:#FE980F;
+  color:#ff0e03;
   font-size: 20px;
   padding: 10px;
   font-weight:bold;
@@ -2583,5 +2556,45 @@ li > a{
     height: 100%;
     z-index: 50;
     background: rgba(255,255,255,0.7);
+}
+
+#slider .onnew {
+    padding: 7px 15px;
+    color: white;
+    position: absolute;
+    line-height: 1;
+    font-size: 16px;
+    font-family: 'Raleway', sans-serif;
+    right: 0;
+    top: 3%;
+    background: #ffa6a8;
+    z-index: 10;
+}
+
+#slider .onsale {
+    padding: 7px 15px;
+    color: white;
+    position: absolute;
+    line-height: 1;
+    font-size: 16px;
+    font-family: 'Raleway', sans-serif;
+    background: #8ce6ff;
+    right: 0;
+    top: 3%;
+    z-index: 10;
+}
+
+.pull-left {
+  float: left;
+}
+.pull-right {
+  float: right;
+}
+.help-block {
+  color: red;
+  font-weight: bold;
+}
+.has-error input {
+  border: 1px dotted red;
 }
 /*end loading */

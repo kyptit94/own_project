@@ -35,20 +35,23 @@
                                           <p class="onnew">Hot</p>
                                           @endif
                                         <div class="icon-product">
-                                            <button class="btn">
+                                            <button title="Thêm vào giỏ hàng" onClick="addToCartAjax('{{ $product_new->id }}','default')" class="btn">
                                                 <span class="lnr lnr-lock"></span>
                                             </button>
-                                            <button type="button" class="btn click-quick-view" data-toggle="modal"
-                                                    data-target="#exampleModalCenter">
+                                            <button title="Thêm vào so sánh" onClick="addToCartAjax('{{ $product_new->id }}','compare')" type="button" class="btn click-quick-view" >
                                                 <span class="lnr lnr-magnifier"></span>
                                             </button>
-                                            <button class="btn">
+                                            <button title="Thêm vào danh sách yêu thích" onClick="addToCartAjax('{{ $product_new->id }}','wishlist')" class="btn">
                                                 <span class="lnr lnr-heart"></span>
                                             </button>
                                         </div>
                                     </div>
                                     <div class="card-body">
-                                        <p class="card-title"><a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">Beauty </a></p>
+                                        <p class="card-title">
+                                            @foreach($product_new->categories as $category)
+                                                <a href="{!!$category->getUrl()!!}">{{$category->name}}, </a> 
+                                            @endforeach
+                                        </p>
                                         <p class="woocommerce-loop-product__title"><a href="{{ $product_new->getUrl() }}" tppabs="http://html.physcode.com/uray/{{ $product_new->getUrl() }}">
                                             {{ $product_new->name }}</a></p>
                                         <span class="price">
@@ -85,20 +88,23 @@
                                           <p class="onnew">Hot</p>
                                           @endif
                                         <div class="icon-product">
-                                            <button class="btn">
+                                            <button title="Thêm vào giỏ hàng" onClick="addToCartAjax('{{ $product_new->id }}','default')" class="btn">
                                                 <span class="lnr lnr-lock"></span>
                                             </button>
-                                            <button type="button" class="btn click-quick-view" data-toggle="modal"
-                                                    data-target="#exampleModalCenter">
+                                            <button title="Thêm vào so sánh" onClick="addToCartAjax('{{ $product_new->id }}','compare')" type="button" class="btn click-quick-view" >
                                                 <span class="lnr lnr-magnifier"></span>
                                             </button>
-                                            <button class="btn">
+                                            <button title="Thêm vào danh sách yêu thích" onClick="addToCartAjax('{{ $product_new->id }}','wishlist')" class="btn">
                                                 <span class="lnr lnr-heart"></span>
                                             </button>
                                         </div>
                                     </div>
                                     <div class="card-body">
-                                        <p class="card-title"><a href="{{ $product_new->getUrl() }}" tppabs="http://html.physcode.com/uray/product-list.html">Beauty </a></p>
+                                        <p class="card-title">
+                                             @foreach($product_new->categories as $category)
+                                                <a href="{!!$category->getUrl()!!}">{{$category->name}}, </a> 
+                                            @endforeach
+                                        </p>
                                         <p class="woocommerce-loop-product__title"><a href="{{ $product_new->getUrl() }}" tppabs="http://html.physcode.com/uray/{{ $product_new->getUrl() }}">
                                             {{ $product_new->name }}</a></p>
                                         <span class="price">
@@ -136,20 +142,23 @@
                                           <p class="onnew">Hot</p>
                                           @endif
                                         <div class="icon-product">
-                                            <button class="btn">
+                                            <button title="Thêm vào giỏ hàng" onClick="addToCartAjax('{{ $product_new->id }}','default')" class="btn">
                                                 <span class="lnr lnr-lock"></span>
                                             </button>
-                                            <button type="button" class="btn click-quick-view" data-toggle="modal"
-                                                    data-target="#exampleModalCenter">
+                                            <button title="Thêm vào so sánh" onClick="addToCartAjax('{{ $product_new->id }}','compare')" type="button" class="btn click-quick-view" >
                                                 <span class="lnr lnr-magnifier"></span>
                                             </button>
-                                            <button class="btn">
+                                            <button title="Thêm vào danh sách yêu thích" onClick="addToCartAjax('{{ $product_new->id }}','wishlist')" class="btn">
                                                 <span class="lnr lnr-heart"></span>
                                             </button>
                                         </div>
                                     </div>
                                     <div class="card-body">
-                                        <p class="card-title"><a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">Beauty </a></p>
+                                        <p class="card-title">
+                                             @foreach($product_new->categories as $category)
+                                                <a href="{!!$category->getUrl()!!}">{{$category->name}}, </a> 
+                                            @endforeach
+                                        </p>
                                         <p class="woocommerce-loop-product__title"><a href="{{ $product_new->getUrl() }}" tppabs="http://html.physcode.com/uray/{{ $product_new->getUrl() }}">
                                             {{ $product_new->name }}</a></p>
                                         <span class="price">
@@ -168,86 +177,6 @@
                         </div>
                     </div>
                     @endif
-                </div>
-                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content container">
-                            <div class="product-single-quick-view">
-                                <div class="row product_detail">
-                                    <div class="col-md-6 col-sm-12 col-12">
-                                        <div class="flex-quick-view">
-                                            <div id="flex-slider" class="flexslider">
-                                                <ul class="slides">
-                                                    <li>
-                                                        <img src="product_detail.jpg" tppabs="http://html.physcode.com/uray/imager/product-detail/product_detail.jpg" alt="">
-                                                    </li>
-                                                    <li>
-                                                        <img src="product_detail.jpg" tppabs="http://html.physcode.com/uray/imager/product-detail/product_detail.jpg" alt="">
-                                                    </li>
-                                                    <li>
-                                                        <img src="product_detail.jpg" tppabs="http://html.physcode.com/uray/imager/product-detail/product_detail.jpg" alt="">
-                                                    </li>
-                                                    <li>
-                                                        <img src="product_detail.jpg" tppabs="http://html.physcode.com/uray/imager/product-detail/product_detail.jpg" alt="">
-                                                    </li>
-                                                    <!-- items mirrored twice, total of 12 -->
-                                                </ul>
-                                            </div>
-                                            <div id="flex-carousel" class="flexslider">
-                                                <ul class="slides">
-                                                    <li>
-                                                        <img src="product_detail1.jpg" tppabs="http://html.physcode.com/uray/imager/product-detail/product_detail1.jpg" alt="">
-                                                    </li>
-                                                    <li>
-                                                        <img src="product_detail2.jpg" tppabs="http://html.physcode.com/uray/imager/product-detail/product_detail2.jpg" alt="">
-                                                    </li>
-                                                    <li>
-                                                        <img src="product_detail3.jpg" tppabs="http://html.physcode.com/uray/imager/product-detail/product_detail3.jpg" alt="">
-                                                    </li>
-                                                    <li>
-                                                        <img src="product_detail4.jpg" tppabs="http://html.physcode.com/uray/imager/product-detail/product_detail4.jpg" alt="">
-                                                    </li>
-                                                    <!-- items mirrored twice, total of 12 -->
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12 col-12 content-product">
-                                        <h2>Whitening cream | $65</h2>
-                                        <p><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                                                class="fas fa-star"></i><i class="fas fa-star"></i> &nbsp; (2 customer
-                                            review)</p>
-                                        <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                                            when an
-                                            unknown printer took a galley of type and scrambled it to make a type specimen
-                                            book.
-                                            It has survived not only five centuries, but also the leap into electronic </p>
-                                        <div class="infor-product">
-                                            <p><span>Sku: </span>22</p>
-                                            <p><span>Category: </span>Cosmetic</p>
-                                            <p><span>Tag: </span>Trendy</p>
-                                            <p><span>Share: </span>
-                                                <a href=""><i class="fab fa-facebook"></i></a>
-                                                <a href=""><i class="fab fa-linkedin-in"></i></a>
-                                                <a href=""><i class="fab fa-instagram"></i></a></p>
-                                        </div>
-                                        <div>
-                                            <div class="btn-group">
-                                                <button type="button" class="prev btn ">-</button>
-                                                <button type="button" class="show-number btn ">1</button>
-                                                <button type="button" class="next btn ">+</button>
-                                            </div>
-                                            <div class="btn-group">
-                                                <a href="#" class="btn add-to-cart">ADD TO CART<p><i
-                                                        class="fas fa-cart-plus"></i></p> </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <span class="lnr lnr-cross close-quick-view" data-dismiss="modal"></span>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

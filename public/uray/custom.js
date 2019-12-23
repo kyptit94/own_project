@@ -65,6 +65,7 @@ var custom_js = {
 				number = 1;
 			}
 			show_number.text(number);
+			$("#quantity-cart").val(number);
 
 		});
 
@@ -79,6 +80,7 @@ var custom_js = {
 				number = a + 1;
 			}
 			show_number.text(number);
+			$("#quantity-cart").val(number);
 		});
 
 

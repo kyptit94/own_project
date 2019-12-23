@@ -3,7 +3,7 @@
 @section('main')
 <div class="row">
         <div class="container">
-                <h2 class="title text-center">{{ $title }}</h2>
+                <h2 class="title text-center">{{ $title }} 2</h2>
                   @if (!empty($itemsList))
                     @foreach ($itemsList as $item)
                         <div class="col-sm-3 col-xs-4">

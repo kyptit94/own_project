@@ -236,4 +236,5 @@ Get image
         }])->sort($sortBy, $sortOrder)->get()->groupBy('parent');
         return $listFullCategory;
     }
+
 }

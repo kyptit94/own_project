@@ -4,7 +4,6 @@
 <section>
     <div class="container">
       <div class="row">
-<h2 class="title text-center">{{ $title }}</h2>
 @if (count($cart) ==0)
     <div class="col-md-12 text-danger">
         Cart empty!
@@ -70,7 +69,7 @@
     </tbody>
   </table>
   </div>
-<form class="shipping_address" id="form-order" role="form" method="POST" action="{{ route('addOrder') }}">
+<form class="shipping_address" style="width:100%" id="form-order" role="form" method="POST" action="{{ route('order.add') }}">
     {{ csrf_field() }}
     <div class="row">
     <div class="col-md-6">
@@ -106,6 +105,7 @@
 {{-- Total --}}
         <div class="row">
             <div class="col-md-12">
+                <h3 class="control-label"><i class="fa fa-cash" aria-hidden="true"></i> Thành tiền:<br></h3>
                 <table class="table box table-bordered" id="showTotal">
                     @foreach ($dataTotal as $key => $element)
                     @if ($element['value'] !=0)
@@ -142,7 +142,7 @@
         </div>
 {{-- End total --}}
 
-        <div class="row" style="padding-bottom: 20px;">
+    </div>
             <div class="col-md-12 text-center">
              <div class="pull-left">
                 <button class="btn btn-default" type="button" style="cursor: pointer;padding:10px 30px" onClick="location.href='{{ route('cart') }}'"><i class="fa fa-arrow-left"></i>{{ trans('cart.back_to_cart') }}</button>
@@ -151,9 +151,6 @@
                         <button class="btn btn-success" id="submit-order" type="submit" style="cursor: pointer;padding:10px 30px"><i class="fa fa-check"></i> {{ trans('cart.confirm') }}</button>
                     </div>
             </div>
-        </div>
-
-    </div>
 </div>
 </form>
 @endif

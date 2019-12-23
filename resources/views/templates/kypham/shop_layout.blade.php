@@ -34,6 +34,7 @@ $carts = \Cart::getListCart();
   <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css" tppabs="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
   <link rel="stylesheet" href="owl.carousel.css" tppabs="http://html.physcode.com/uray/asset/css/owl.carousel.css">
   <link rel="stylesheet" href="owl.theme.default.css" tppabs="http://html.physcode.com/uray/asset/css/owl.theme.default.css">
+  <link rel="stylesheet" href="{{asset('/templates/default/css/main.css')}}">
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" type="text/css" href="style.css-ver=1.css" tppabs="http://html.physcode.com/uray/style.css?ver=1">
@@ -42,6 +43,13 @@ $carts = \Cart::getListCart();
   <link href="all.css" tppabs="http://html.physcode.com/uray/asset/css/all.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=El+Messiri:400,500,600,700|Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,700,700i,800,800i,900,900i" tppabs="https://fonts.googleapis.com/css?family=El+Messiri:400,500,600,700|Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,700,700i,800,800i,900,900i" rel="stylesheet">
   <link rel="icon" href="favicon.png" tppabs="http://html.physcode.com/uray/favicon.png" type="image/png">
+  <script type="text/javascript" src="jquery-3.3.1.min.js" tppabs="http://html.physcode.com/uray/asset/js/jquery-3.3.1.min.js"></script>
+  <script type="text/javascript" src="bootstrap.min.js" tppabs="http://html.physcode.com/uray/asset/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="{{ asset('/js/notify.min.js') }}"></script>
+  <script type="text/javascript" src="jquery.flexslider-min.js" tppabs="http://html.physcode.com/uray/asset/js/jquery.flexslider-min.js"></script>
+  <script type="text/javascript" src="owl.carousel.js" tppabs="http://html.physcode.com/uray/asset/js/owl.carousel.js"></script>
+  <script type="text/javascript" src="custom.js" tppabs="http://html.physcode.com/uray/asset/js/custom.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/mouse0270-bootstrap-notify/3.1.7/bootstrap-notify.min.js"></script>
   <!--Module header -->
   @isset ($blocksContent['header'])
   @foreach ( $blocksContent['header'] as $layout)
@@ -125,7 +133,49 @@ $carts = \Cart::getListCart();
 
 
   @stack('scripts')
+  <script type="text/javascript">
+  function addToCartAjax(id,instance = null){
+    $.ajax({
+        url: "{{ route('cart.add_ajax') }}",
+        type: "POST",
+        dataType: "JSON",
+        data: {"id": id,"instance":instance, "_token":"{{ csrf_token() }}"},
+        async: false,
+        success: function(data){
+          // console.log(data);
+            error= parseInt(data.error);
+            if(error ==0)
+            {
+              setTimeout(function () {
+                if(data.instance =='default'){
+                  $('.sc-cart').html(data.count_cart);
+                }else{
+                  $('.sc-'+data.instance).html(data.count_cart);
+                }
+              }, 1000);
+                $.notify({
+                  icon: 'glyphicon glyphicon-star',
+                  message: data.msg
+                },{
+                  type: 'success'
+                });
+            }else{
+              if(data.redirect){
+                window.location.replace(data.redirect);
+                return;
+              }
+              $.notify({
+              icon: 'glyphicon glyphicon-warning-sign',
+                message: data.msg
+              },{
+                type: 'danger'
+              });
+            }
 
+            }
+    });
+  }
+</script>
   <!--message-->
   @if(Session::has('success'))
   <script type="text/javascript">
@@ -181,11 +231,6 @@ $carts = \Cart::getListCart();
   @endisset
   <!--//Module bottom -->
 
-  <script type="text/javascript" src="jquery-3.3.1.min.js" tppabs="http://html.physcode.com/uray/asset/js/jquery-3.3.1.min.js"></script>
-  <script type="text/javascript" src="bootstrap.min.js" tppabs="http://html.physcode.com/uray/asset/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="jquery.flexslider-min.js" tppabs="http://html.physcode.com/uray/asset/js/jquery.flexslider-min.js"></script>
-  <script type="text/javascript" src="owl.carousel.js" tppabs="http://html.physcode.com/uray/asset/js/owl.carousel.js"></script>
-  <script type="text/javascript" src="custom.js" tppabs="http://html.physcode.com/uray/asset/js/custom.js"></script>
 </body>
 
 </html>

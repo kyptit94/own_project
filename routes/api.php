@@ -26,3 +26,6 @@ Route::group(
         $router->get('/product', 'Product@index')->name('api.product');
         $router->get('/order', 'Order@index')->name('api.order');
     });
+
+Route::get('/add-to-cart', 'ShopCart@addToCartAjax')
+->name('api.addToCart');

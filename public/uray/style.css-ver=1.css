@@ -1617,7 +1617,7 @@ i {
         max-width: 100%;
         display: block; }
       .product .card .card-img-top img {
-        height: auto;
+        height: 258px;
         z-index: 3;
         width: 100%; }
       .product .card .card-img-top .icon-product {

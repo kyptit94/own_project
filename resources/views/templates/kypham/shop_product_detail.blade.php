@@ -1,24 +1,23 @@
 @extends('templates.'.sc_store('template').'.shop_layout')
 
 @section('center')
-  <div class="title-page"
-     style="background-image: url('Shop_3Columns-title.jpg')/*tpa=http://html.physcode.com/uray/imager/shop/Shop_3Columns-title.jpg*/;background-position: center center;background-size: cover;">
-    <div class="container">
-        <div class="row">
-            <div class=" col-md-6 inner-title-page">
-                <h1>Shop</h1>
-                <p><span>Home</span> / Shop / Product Single</p>
-            </div>
-        </div>
-    </div>
-</div>
-<!--end title detail-->
 <!--product detail-->
 <div class="container">
     <div class="product-single-detail">
         <div class="row product_detail">
             <div class="col-md-6 col-sm-12 col-12">
                 <div id="slider" class="flexslider">
+                    @if ($product->price != $product->getFinalPrice() && $product->kind != SC_PRODUCT_GROUP)
+                    <p class="onsale">Sale</p>
+                    @elseif($product->type == SC_PRODUCT_NEW)
+                    <p class="onnew">Mới</p>
+                    @elseif($product->type == SC_PRODUCT_HOT)
+                    <p class="onnew">Hot</p>
+                    @elseif($product->kind == SC_PRODUCT_BUILD)
+                    <p class="onnew">Gói sản phẩm</p>
+                    @elseif($product->kind == SC_PRODUCT_GROUP)
+                    <p class="onsale">Bộ sản phẩm</p>
+                    @endif
                     <ul class="slides">
                       @if ($product->images->count())
                        @foreach ($product->images as $key=>$image)
@@ -45,46 +44,76 @@
                 </div>
             </div>
             <div class="col-md-6 col-sm-12 col-12 content-product">
-                <h2>{{$product->name}} | {!! $product->showPrice() !!}</h2>
+                <form id="buy_block" action="{{ route('cart.add') }}" method="post">
+          {{ csrf_field() }}
+          <input type="hidden" name="product_id" id="product-detail-id" value="{{ $product->id }}" />
+                <h2>{{ $product->name }}</h2>
                 <p><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
                         class="fas fa-star"></i><i class="fas fa-star"></i> &nbsp; (2 customer review)</p>
-                <p>{{$product->description}} </p>
+                <p>{{$product->description}}</p>
                 <div class="infor-product">
-                    <p><span>Sku: </span>{{$product->sku}}</p>
-                    <p><span>{{ trans('product.brand') }}</span> {{ empty($product->brand->name)?'Không xác định':$product->brand->name }}</p>
-                    <p><span>Danh mục: </span>@foreach ($product->categories as $key=>$category) <a href="{{$category->getUrl()}}">{{$category->name}}</a> @endforeach</p>
-                    <p><span>Tình trạng: </span>@if (sc_config('show_date_available') && $product->date_available >= date('Y-m-d H:i:s'))
+                    <p><span>SKU: </span>{{ $product->sku }}</p>
+                    <p><span>Giá: </span>{!! $product->showPrice() !!}</p>
+                    <div  id="product-detail-attr">
+                  @if ($product->attributes())
+                  {!! $product->renderAttributeDetails() !!}
+                  @endif
+                </div>
+                <p><span>{{ trans('product.availability') }}: </span>
+                    @if (sc_config('show_date_available') && $product->date_available >= date('Y-m-d H:i:s'))
                     {{ $product->date_available }}
                     @elseif($product->stock <=0 && sc_config('product_buy_out_of_stock') == 0)
                     {{ trans('product.out_stock') }}
                     @else
                     {{ trans('product.in_stock') }}
-                    @endif</p>
+                    @endif
+                </p>
+                <p><span>{{ trans('product.brand') }}: </span> {{ empty($product->brand->name)?'None':$product->brand->name }}</p>
 
-                    <p><span>Share: </span>
-                        <a href=""><i class="fab fa-facebook"></i></a>
-                        <a href=""><i class="fab fa-linkedin-in"></i></a>
-                        <a href=""><i class="fab fa-instagram"></i></a></p>
+              @if ($product->kind == SC_PRODUCT_GROUP)
+              <div class="products-group">
+                @php
+                  $groups = $product->groups
+                @endphp
+                <b>{{ trans('product.groups') }}</b>:<br>
+                @foreach ($groups as $group)
+                  <span class="product-group" data-id="{{ $group->product_id }}">{!! sc_image_render($group->product->image) !!}</span>
+                @endforeach
+              </div>
+              @endif
 
+              @if ($product->kind == SC_PRODUCT_BUILD)
+              <div class="products-group">
+                @php
+                  $builds = $product->builds
+                @endphp
+                <b>{{ trans('product.builds') }}</b>:<br>
+                <span class="product-build">{!! sc_image_render($product->image) !!} = </span>
+                @foreach ($builds as $k => $build)
+                  {!! ($k)?'<i class="fa fa-plus" aria-hidden="true"></i>':'' !!} <span class="product-build">{{ $build->quantity }} x <a target="_new" href="{{ $build->product->getUrl() }}">{!! sc_image_render($build->product->image) !!}</a></span>
+                @endforeach
                 </div>
+              </div>
+              @endif
+
+                <span>
                 <div>
+                    <input type="hidden" id="quantity-cart" name="qty" value="1" min="1" />
                     <div class="btn-group">
                         <button type="button" class="prev btn ">-</button>
                         <button type="button" class="show-number btn ">1</button>
                         <button type="button" class="next btn ">+</button>
                     </div>
                     <div class="btn-group">
-                        <a href="#" class="btn add-to-cart">ADD TO CART<p><i
-                                class="fas fa-cart-plus"></i></p> </a>
+                        <button type="submit" class="btn add-to-cart">THÊM VÀO GIỎ HÀNG<p><i
+                                class="fas fa-cart-plus"></i></p>
+                        </button>
                     </div>
                 </div>
-                <div>
-                  <div  id="product-detail-attr">
-                  @if ($product->attributes())
-                  {!! $product->renderAttributeDetails() !!}
-                  @endif
-                </div>
-                </div>
+                </span>
+            
+          </div><!--/product-details-->
+        </form>
             </div>
             <div class="col-md-12 col-sm-12 col-12 content-product">
                 <div class="information">
@@ -238,7 +267,7 @@
                     </div>
                     <div class="card-body">
                         <p class="card-title"><a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">Beauty </a></p>
-                        <p class="woocommerce-loop-product__title"><a href="{{ $product_rel->getUrl() }}" tppabs="http://html.physcode.com/uray/product-single.html">
+                        <p class="woocommerce-loop-product__title"><a href="{{ $product_rel->getUrl() }}" >
                             {{ $product_rel->name }}</a></p>
                         <span class="price">
                         <ins>
@@ -255,3 +284,26 @@
     </div>
 </div>
 @endsection
+
+@section('breadcrumb')
+<div class="title-page"
+     style="background-image: url('Shop_3Columns-title.jpg')/*tpa=http://html.physcode.com/uray/imager/shop/Shop_3Columns-title.jpg*/;background-position: center center;background-size: cover;
+        margin-bottom: 20px; 
+     ">
+    <div class="container">
+        <div class="row">
+            <div class=" col-md-6 inner-title-page">
+                <h1>{{ $title }}</h1>
+                <p><span><a href="{{ route('home') }}">Home</a></span> /
+                @foreach($product->categories as $category)
+                    <a href="{!!$category->getUrl()!!}">{{$category->name}}, </a> 
+                @endforeach
+                / {{ $title }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+
+@push('scripts')
+@endpush

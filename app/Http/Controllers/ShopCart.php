@@ -29,8 +29,8 @@ class ShopCart extends GeneralController
  * Get list cart: screen get cart
  * @return [type] [description]
  */
-    public function getCart()
-    {
+public function getCart()
+{
         session()->forget('paymentMethod'); //destroy paymentMethod
         session()->forget('shippingMethod'); //destroy shippingMethod
         //Shipping
@@ -163,8 +163,8 @@ class ShopCart extends GeneralController
             'address2' => request('address2'),
             'phone' => request('phone'),
             'comment' => request('comment'),
-         ],
-        ]);
+        ],
+    ]);
         // dd(session()->all());
         return redirect()->route('checkout');
     }
@@ -173,90 +173,90 @@ class ShopCart extends GeneralController
  * Checkout screen
  * @return [view]
  */
-    public function getCheckout()
-    {
-        if (!session('shippingMethod') || !session('paymentMethod') || !session('shippingAddress')) {
-            return redirect()->route('cart');
-        }
-        //====================================================
-        $paymentMethod = session('paymentMethod');
-        $shippingMethod = session('shippingMethod');
-        $shippingAddress = session('shippingAddress');
-        $classShippingMethod = '\App\Extensions\Shipping\Controllers\\' . $shippingMethod;
-        $shippingMethodData = (new $classShippingMethod)->getData();
-        $classPaymentMethod = '\App\Extensions\Payment\Controllers\\' . $paymentMethod;
-        $paymentMethodData = (new $classPaymentMethod)->getData();
-        $objects = array();
-        $objects[] = (new ShopOrderTotal)->getShipping();
-        $objects[] = (new ShopOrderTotal)->getDiscount();
-        $objects[] = (new ShopOrderTotal)->getReceived();
-        $dataTotal = ShopOrderTotal::processDataTotal($objects);
-        //Set session dataTotal
-        session(['dataTotal' => $dataTotal]);
-        return view('templates.' . sc_store('template') . '.shop_checkout',
-            array(
-                'title' => trans('front.checkout_title'),
-                'description' => '',
-                'keyword' => '',
-                'cart' => Cart::content(),
-                'dataTotal' => $dataTotal,
-                'paymentMethodData' => $paymentMethodData,
-                'shippingMethodData' => $shippingMethodData,
-                'shippingAddress' => $shippingAddress,
-                'attributesGroup' => ShopAttributeGroup::getList(),
-            )
-        );
+public function getCheckout()
+{
+    if (!session('shippingMethod') || !session('paymentMethod') || !session('shippingAddress')) {
+        return redirect()->route('cart');
     }
+        //====================================================
+    $paymentMethod = session('paymentMethod');
+    $shippingMethod = session('shippingMethod');
+    $shippingAddress = session('shippingAddress');
+    $classShippingMethod = '\App\Extensions\Shipping\Controllers\\' . $shippingMethod;
+    $shippingMethodData = (new $classShippingMethod)->getData();
+    $classPaymentMethod = '\App\Extensions\Payment\Controllers\\' . $paymentMethod;
+    $paymentMethodData = (new $classPaymentMethod)->getData();
+    $objects = array();
+    $objects[] = (new ShopOrderTotal)->getShipping();
+    $objects[] = (new ShopOrderTotal)->getDiscount();
+    $objects[] = (new ShopOrderTotal)->getReceived();
+    $dataTotal = ShopOrderTotal::processDataTotal($objects);
+        //Set session dataTotal
+    session(['dataTotal' => $dataTotal]);
+    return view('templates.' . sc_store('template') . '.shop_checkout',
+        array(
+            'title' => trans('front.checkout_title'),
+            'description' => '',
+            'keyword' => '',
+            'cart' => Cart::content(),
+            'dataTotal' => $dataTotal,
+            'paymentMethodData' => $paymentMethodData,
+            'shippingMethodData' => $shippingMethodData,
+            'shippingAddress' => $shippingAddress,
+            'attributesGroup' => ShopAttributeGroup::getList(),
+        )
+    );
+}
 
 /**
  * add to cart by post, always use page product detail
  * @return [type]           [description]
  */
-    public function addToCart()
-    {
-        $data = request()->all();
-        $product_id = $data['product_id'];
-        $form_attr = $data['form_attr'] ?? null;
-        $qty = $data['qty'];
-        $type = isset($data['type'])?$data['type']:'view';
-        $product = ShopProduct::find($product_id);
-        if ($product->allowSale()) {
-            $options = array();
-            $options = $form_attr;
-            $dataCart = array(
-                'id' => $product_id,
-                'name' => $product->name,
-                'qty' => $qty,
-                'price' => $product->getFinalPrice(),
-            );
-            if ($options) {
-                $dataCart['options'] = $options;
-            }
-            Cart::add($dataCart);
-            return redirect()->route('cart')
-                ->with(
-                    ['message' => trans('cart.success', ['instance' => 'cart'])]
-                );
-        } else {
-            return redirect()->route('cart')
-                ->with(
-                    ['error' => trans('cart.dont_allow_sale')]
-                );
+public function addToCart()
+{
+    $data = request()->all();
+    $product_id = $data['product_id'];
+    $form_attr = $data['form_attr'] ?? null;
+    $qty = $data['qty'];
+    $type = isset($data['type'])?$data['type']:'view';
+    $product = ShopProduct::find($product_id);
+    if ($product->allowSale()) {
+        $options = array();
+        $options = $form_attr;
+        $dataCart = array(
+            'id' => $product_id,
+            'name' => $product->name,
+            'qty' => $qty,
+            'price' => $product->getFinalPrice(),
+        );
+        if ($options) {
+            $dataCart['options'] = $options;
         }
-
+        Cart::add($dataCart);
+        return redirect()->route('cart')
+        ->with(
+            ['message' => trans('cart.success', ['instance' => 'cart'])]
+        );
+    } else {
+        return redirect()->route('cart')
+        ->with(
+            ['error' => trans('cart.dont_allow_sale')]
+        );
     }
+
+}
 
 /**
  * Add new order
  */
-    public function addOrder(Request $request)
-    {
-        if (Cart::count() == 0) {
-            return redirect()->route('home');
-        }
+public function addOrder(Request $request)
+{
+    if (Cart::count() == 0) {
+        return redirect()->route('home');
+    }
         //Not allow for guest
-        if (!sc_config('shop_allow_guest') && !auth()->user()) {
-            return redirect()->route('login');
+    if (!sc_config('shop_allow_guest') && !auth()->user()) {
+        return redirect()->route('login');
         } //
         $data = request()->all();
         if (!$data) {
@@ -331,7 +331,7 @@ class ShopCart extends GeneralController
             foreach ($arrCartDetail as $item) {
                 $product = ShopProduct::find($item['product_id']);
                 $data_payment[] =
-                    [
+                [
                     'name' => $item['name'],
                     'quantity' => $item['qty'],
                     'price' => sc_currency_value($item['price']),
@@ -339,14 +339,14 @@ class ShopCart extends GeneralController
                 ];
             }
             $data_payment[] =
-                [
+            [
                 'name' => 'Shipping',
                 'quantity' => 1,
                 'price' => $shipping,
                 'sku' => 'shipping',
             ];
             $data_payment[] =
-                [
+            [
                 'name' => 'Discount',
                 'quantity' => 1,
                 'price' => $discount,
@@ -367,244 +367,243 @@ class ShopCart extends GeneralController
  * [addToCartAjax description]
  * @param Request $request [description]
  */
-    public function addToCartAjax(Request $request)
-    {
-        if (!$request->ajax()) {
-            return redirect()->route('cart');
-        }
-        $instance = request('instance') ?? 'default';
-        $cart = \Cart::instance($instance);
+public function addToCartAjax(Request $request)
+{
+    if (!$request->ajax()) {
+        return redirect()->route('cart');
+    }
+    $instance = request('instance') ?? 'default';
+    $cart = \Cart::instance($instance);
 
-        $id = request('id');
-        $product = ShopProduct::find($id);
-        $html = '';
-        switch ($instance) {
-            case 'default':
-                if ($product->attributes->count() || $product->kind == SC_PRODUCT_GROUP) {
+    $id = request('id');
+    $product = ShopProduct::find($id);
+    $html = '';
+    switch ($instance) {
+        case 'default':
+        if ($product->attributes->count() || $product->kind == SC_PRODUCT_GROUP) {
                     //Products have attributes or kind is group,
                     //need to select properties before adding to the cart
-                    return response()->json(
-                        [
-                            'error' => 1,
-                            'redirect' => $product->getUrl(),
-                            'msg' => '',
-                        ]
-                    );
-                }
+            return response()->json(
+                [
+                    'error' => 1,
+                    'redirect' => $product->getUrl(),
+                    'msg' => '',
+                ]
+            );
+        }
 
-                if ($product->allowSale()) {
-                    $cart->add(
-                        array(
-                            'id' => $id,
-                            'name' => $product->name,
-                            'qty' => 1,
-                            'price' => $product->getFinalPrice(),
-                        )
-                    );
-                } else {
-                    return response()->json(
-                        [
-                            'error' => 1,
-                            'msg' => trans('cart.dont_allow_sale'),
-                        ]
-                    );
-                }
-                break;
+        if ($product->allowSale()) {
+            $cart->add(
+                array(
+                    'id' => $id,
+                    'name' => $product->name,
+                    'qty' => 1,
+                    'price' => $product->getFinalPrice(),
+                )
+            );
+        } else {
+            return response()->json(
+                [
+                    'error' => 1,
+                    'msg' => trans('cart.dont_allow_sale'),
+                ]
+            );
+        }
+        break;
 
-            default:
+        default:
                 //Wishlist or Compare...
-                ${'arrID' . $instance} = array_keys($cart->content()->groupBy('id')->toArray());
-                if (!in_array($id, ${'arrID' . $instance})) {
-                    try {
-                        $cart->add(
-                            array(
-                                'id' => $id,
-                                'name' => $product->name,
-                                'qty' => 1,
-                                'price' => $product->getFinalPrice(),
-                            )
-                        );
-                    } catch (\Exception $e) {
-                        return response()->json(
-                            [
-                                'error' => 1,
-                                'msg' => $e->getMessage(),
-                            ]
-                        );
-                    }
-
-                } else {
-                    return response()->json(
-                        [
-                            'error' => 1,
-                            'msg' => trans('cart.exist', ['instance' => $instance]),
-                        ]
-                    );
-                }
-                break;
-        }
-
-        $carts = \Cart::getListCart($instance);
-        if ($instance == 'default' && $carts['count']) {
-            $html .= '<div><div class="shopping-cart-list">';
-            foreach ($carts['items'] as $item) {
-                $html .= '<div class="product product-widget"><div class="product-thumb">';
-                $html .= '<img src="' . $item['image'] . '" alt="">';
-                $html .= '</div>';
-                $html .= '<div class="product-body">';
-                $html .= '<h3 class="product-price">' . $item['price'] . ' <span class="qty">x' . $item['qty'] . '</span></h3>';
-                $html .= '<h2 class="product-name"><a href="' . $item['url'] . '">' . $item['name'] . '</a></h2>';
-                $html .= '</div>';
-                $html .= '<a href="' . route("cart.remove", ['id' => $item['rowId']]) . '"><button class="cancel-btn"><i class="fa fa-trash"></i></button></a>';
-                $html .= '</div>';
+        ${'arrID' . $instance} = array_keys($cart->content()->groupBy('id')->toArray());
+        if (!in_array($id, ${'arrID' . $instance})) {
+            try {
+                $cart->add(
+                    array(
+                        'id' => $id,
+                        'name' => $product->name,
+                        'qty' => 1,
+                        'price' => $product->getFinalPrice(),
+                    )
+                );
+            } catch (\Exception $e) {
+                return response()->json(
+                    [
+                        'error' => 1,
+                        'msg' => $e->getMessage(),
+                    ]
+                );
             }
-            $html .= '</div></div>';
-            $html .= '<div class="shopping-cart-btns">
-                    <a href="' . route('cart') . '"><button class="main-btn">' . trans('front.cart_title') . '</button></a>
-                    <a href="' . route('checkout') . '"><button class="primary-btn">' . trans('front.checkout_title') . ' <i class="fa fa-arrow-circle-right"></i></button></a>
-                  </div>';
-        }
-        return response()->json(
-            [
-                'error' => 0,
-                'count_cart' => $carts['count'],
-                'instance' => $instance,
-                'subtotal' => $carts['subtotal'],
-                'html' => $html,
-                'msg' => trans('cart.success', ['instance' => ($instance == 'default') ? 'cart' : $instance]),
-            ]
-        );
 
+        } else {
+            return response()->json(
+                [
+                    'error' => 1,
+                    'msg' => trans('cart.exist', ['instance' => $instance]),
+                ]
+            );
+        }
+        break;
     }
+
+    $carts = \Cart::getListCart($instance);
+    if ($instance == 'default' && $carts['count']) {
+        $html .= '';
+        foreach ($carts['items'] as $item) {
+            $html .= '<li class="woocommerce-mini-cart-item mini_cart_item clearfix">
+            <a class="product-image" href="#">
+            <img src="'.$item['image'].'" height="81" width="70" alt="cart-1">
+            </a>
+            <a class="product-title" href="#">'.\Illuminate\Support\Str::limit($item['name'],15,'...').'</a>
+
+            <span class="woocommerce-Price-amount amount">
+            '.$item['showPrice'].'
+            </span>
+            <span class="quantity">
+            Số lượng: '.$item['qty'].'
+            </span>
+            </li>';
+        }
+    }
+    return response()->json(
+        [
+            'error' => 0,
+            'count_cart' => $carts['count'],
+            'instance' => $instance,
+            'subtotal' => $carts['subtotal'],
+            'html' => $html,
+            'msg' => trans('cart.success', ['instance' => ($instance == 'default') ? 'cart' : $instance]),
+        ]
+    );
+
+}
 
 /**
  * [updateToCart description]
  * @param  Request $request [description]
  * @return [type]           [description]
  */
-    public function updateToCart(Request $request)
-    {
-        if (!$request->ajax()) {
-            return redirect()->route('cart');
-        }
-        $id = request('id');
-        $rowId = request('rowId');
-        $product = ShopProduct::find($id);
-        $new_qty = request('new_qty');
-        if ($product->stock < $new_qty && !sc_config('product_buy_out_of_stock')) {
-            return response()->json(
-                [
-                    'error' => 1,
-                    'msg' => trans('cart.over', ['item' => $product->sku]),
-                ]);
-        } else {
-            Cart::update($rowId, ($new_qty) ? $new_qty : 0);
-            return response()->json(
-                ['error' => 0,
-                ]);
-        }
-
+public function updateToCart(Request $request)
+{
+    if (!$request->ajax()) {
+        return redirect()->route('cart');
     }
+    $id = request('id');
+    $rowId = request('rowId');
+    $product = ShopProduct::find($id);
+    $new_qty = request('new_qty');
+    if ($product->stock < $new_qty && !sc_config('product_buy_out_of_stock')) {
+        return response()->json(
+            [
+                'error' => 1,
+                'msg' => trans('cart.over', ['item' => $product->sku]),
+            ]);
+    } else {
+        Cart::update($rowId, ($new_qty) ? $new_qty : 0);
+        return response()->json(
+            ['error' => 0,
+        ]);
+    }
+
+}
 
 /**
  * [wishlist description]
  * @return [type] [description]
  */
-    public function wishlist()
-    {
+public function wishlist()
+{
 
-        $wishlist = Cart::instance('wishlist')->content();
-        return view('templates.' . sc_store('template') . '.shop_wishlist',
-            array(
-                'title' => trans('front.wishlist'),
-                'description' => '',
-                'keyword' => '',
-                'wishlist' => $wishlist,
-                'layout_page' => 'shop_wishlist',
-            )
-        );
-    }
+    $wishlist = Cart::instance('wishlist')->content();
+    return view('templates.' . sc_store('template') . '.shop_wishlist',
+        array(
+            'title' => trans('front.wishlist'),
+            'description' => '',
+            'keyword' => '',
+            'wishlist' => $wishlist,
+            'layout_page' => 'shop_wishlist',
+        )
+    );
+}
 
 /**
  * [compare description]
  * @return [type] [description]
  */
-    public function compare()
-    {
-        $compare = Cart::instance('compare')->content();
-        return view('templates.' . sc_store('template') . '.shop_compare',
-            array(
-                'title' => trans('front.compare'),
-                'description' => '',
-                'keyword' => '',
-                'compare' => $compare,
-                'layout_page' => 'product_compare',
-            )
-        );
-    }
+public function compare()
+{
+    $compare = Cart::instance('compare')->content();
+    return view('templates.' . sc_store('template') . '.shop_compare',
+        array(
+            'title' => trans('front.compare'),
+            'description' => '',
+            'keyword' => '',
+            'compare' => $compare,
+            'layout_page' => 'product_compare',
+        )
+    );
+}
 
 /**
  * [clearCart description]
  * @return [type] [description]
  */
-    public function clearCart()
-    {
-        Cart::destroy();
-        return redirect()->route('cart');
-    }
+public function clearCart()
+{
+    Cart::destroy();
+    return redirect()->route('cart');
+}
 
 /**
  * Remove item from cart
  * @author lanhktc
  */
-    public function removeItem($id = null)
-    {
-        if ($id === null) {
-            return redirect()->route('cart');
-        }
-
-        if (array_key_exists($id, Cart::content()->toArray())) {
-            Cart::remove($id);
-        }
+public function removeItem($id = null)
+{
+    if ($id === null) {
         return redirect()->route('cart');
     }
+
+    if (array_key_exists($id, Cart::content()->toArray())) {
+        Cart::remove($id);
+    }
+    return redirect()->route('cart');
+}
 
 /**
  * [removeItem_wishlist description]
  * @param  [type] $id [description]
  * @return [type]     [description]
  */
-    public function removeItemWishlist($id = null)
-    {
-        if ($id === null) {
-            return redirect()->route('wishlist');
-        }
-
-        if (array_key_exists($id, Cart::instance('wishlist')->content()->toArray())) {
-            Cart::instance('wishlist')->remove($id);
-        }
+public function removeItemWishlist($id = null)
+{
+    if ($id === null) {
         return redirect()->route('wishlist');
     }
+
+    if (array_key_exists($id, Cart::instance('wishlist')->content()->toArray())) {
+        Cart::instance('wishlist')->remove($id);
+    }
+    return redirect()->route('wishlist');
+}
 
 /**
  * [removeItemCompare description]
  * @param  [type] $id [description]
  * @return [type]     [description]
  */
-    public function removeItemCompare($id = null)
-    {
-        if ($id === null) {
-            return redirect()->route('compare');
-        }
-
-        if (array_key_exists($id, Cart::instance('compare')->content()->toArray())) {
-            Cart::instance('compare')->remove($id);
-        }
+public function removeItemCompare($id = null)
+{
+    if ($id === null) {
         return redirect()->route('compare');
     }
 
-    public function completeOrder($orderId)
-    {
+    if (array_key_exists($id, Cart::instance('compare')->content()->toArray())) {
+        Cart::instance('compare')->remove($id);
+    }
+    return redirect()->route('compare');
+}
+
+public function completeOrder($orderId)
+{
         session()->forget('paymentMethod'); //destroy paymentMethod
         session()->forget('shippingMethod'); //destroy shippingMethod
         session()->forget('totalMethod'); //destroy totalMethod
@@ -618,22 +617,22 @@ class ShopCart extends GeneralController
             if ($checkContent || $checkContentCustomer) {
                 $orderDetail = '';
                 $orderDetail .= '<tr>
-                                    <td>' . trans('email.order.sort') . '</td>
-                                    <td>' . trans('email.order.sku') . '</td>
-                                    <td>' . trans('email.order.name') . '</td>
-                                    <td>' . trans('email.order.price') . '</td>
-                                    <td>' . trans('email.order.qty') . '</td>
-                                    <td>' . trans('email.order.total') . '</td>
-                                </tr>';
+                <td>' . trans('email.order.sort') . '</td>
+                <td>' . trans('email.order.sku') . '</td>
+                <td>' . trans('email.order.name') . '</td>
+                <td>' . trans('email.order.price') . '</td>
+                <td>' . trans('email.order.qty') . '</td>
+                <td>' . trans('email.order.total') . '</td>
+                </tr>';
                 foreach ($data['details'] as $key => $detail) {
                     $orderDetail .= '<tr>
-                                    <td>' . ($key + 1) . '</td>
-                                    <td>' . $detail['sku'] . '</td>
-                                    <td>' . $detail['name'] . '</td>
-                                    <td>' . sc_currency_render($detail['price'], '', '', '', false) . '</td>
-                                    <td>' . number_format($detail['qty']) . '</td>
-                                    <td align="right">' . sc_currency_render($detail['total_price'], '', '', '', false) . '</td>
-                                </tr>';
+                    <td>' . ($key + 1) . '</td>
+                    <td>' . $detail['sku'] . '</td>
+                    <td>' . $detail['name'] . '</td>
+                    <td>' . sc_currency_render($detail['price'], '', '', '', false) . '</td>
+                    <td>' . number_format($detail['qty']) . '</td>
+                    <td align="right">' . sc_currency_render($detail['total_price'], '', '', '', false) . '</td>
+                    </tr>';
                 }
                 $dataFind = [
                     '/\{\{\$title\}\}/',

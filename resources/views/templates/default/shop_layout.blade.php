@@ -171,6 +171,8 @@
                   setTimeout(function () {
                     if(data.instance =='default'){
                       $('.shopping-cart').html(data.count_cart);
+                      $('.cart_list').html(data.html);
+                      console.log($('.cart_list'));
                     }else{
                       $('.shopping-'+data.instance).html(data.count_cart);
                     }

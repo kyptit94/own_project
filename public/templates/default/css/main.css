@@ -2451,6 +2451,18 @@ h2.title {
   font-size: 17px;
   padding: 10px;
 }
+
+.woocommerce-Price-amount .new-price{
+  color:#ff0e03;
+  font-size: 12px;
+  padding: 3px;
+}
+.woocommerce-Price-amount .old-price {
+  text-decoration: line-through;
+  color: #a95d5d;
+  font-size: 12px;
+  padding: 3px;
+}
 .locale .dropdown-menu{
     min-width: auto !important;
 }

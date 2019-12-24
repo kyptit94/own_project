@@ -60,8 +60,8 @@
                                                 <div class="content-best-new">
                                                     <p>{{ $product_hot->description }}</p>
                                                 </div>
-                                                <button>ADD TO CARD</button>
-                                                <button><span class="lnr lnr-heart"></span></button>
+                                                <button  onClick="addToCartAjax('{{ $product_hot->id }}','default')">ADD TO CARD</button>
+                                                <button  onClick="addToCartAjax('{{ $product_hot->id }}','wishlist')"><span class="lnr lnr-heart"></span></button>
                                             </div>
                                         </div>
                                     </div>
@@ -104,8 +104,8 @@
                                                 <div class="content-best-new">
                                                     <p>{{ $product_hot->description }}</p>
                                                 </div>
-                                                <button>ADD TO CARD</button>
-                                                <button><span class="lnr lnr-heart"></span></button>
+                                                <button  onClick="addToCartAjax('{{ $product_hot->id }}','default')">ADD TO CARD</button>
+                                                <button  onClick="addToCartAjax('{{ $product_hot->id }}','wishlist')"><span class="lnr lnr-heart"></span></button>
                                             </div>
                                         </div>
                                     </div>
@@ -148,8 +148,8 @@
                                                 <div class="content-best-new">
                                                     <p>{{ $product_hot->description }}</p>
                                                 </div>
-                                                <button>ADD TO CARD</button>
-                                                <button><span class="lnr lnr-heart"></span></button>
+                                                <button  onClick="addToCartAjax('{{ $product_hot->id }}','default')">ADD TO CARD</button>
+                                                <button  onClick="addToCartAjax('{{ $product_hot->id }}','wishlist')"><span class="lnr lnr-heart"></span></button>
                                             </div>
                                         </div>
                                     </div>
@@ -219,8 +219,8 @@
                                                 <div class="content-best-new">
                                                     <p>{{ $product_sale->description }}</p>
                                                 </div>
-                                                <button>ADD TO CARD</button>
-                                                <button><span class="lnr lnr-heart"></span></button>
+                                                <button  onClick="addToCartAjax('{{ $product_sale->id }}','default')">ADD TO CARD</button>
+                                                <button  onClick="addToCartAjax('{{ $product_sale->id }}','wishlist')"><span class="lnr lnr-heart"></span></button>
                                             </div>
                                         </div>
                                     </div>
@@ -260,8 +260,8 @@
                                                 <div class="content-best-new">
                                                     <p>{{ $product_sale->description }}</p>
                                                 </div>
-                                                <button>ADD TO CARD</button>
-                                                <button><span class="lnr lnr-heart"></span></button>
+                                                <button  onClick="addToCartAjax('{{ $product_sale->id }}','default')">ADD TO CARD</button>
+                                                <button  onClick="addToCartAjax('{{ $product_sale->id }}','wishlist')"><span class="lnr lnr-heart"></span></button>
                                             </div>
                                         </div>
                                     </div>
@@ -305,8 +305,8 @@
                                                 <div class="content-best-new">
                                                     <p>{{ $product_sale->description }}</p>
                                                 </div>
-                                                <button>ADD TO CARD</button>
-                                                <button><span class="lnr lnr-heart"></span></button>
+                                                <button  onClick="addToCartAjax('{{ $product_sale->id }}','default')">ADD TO CARD</button>
+                                                <button  onClick="addToCartAjax('{{ $product_sale->id }}','wishlist')"><span class="lnr lnr-heart"></span></button>
                                             </div>
                                         </div>
                                     </div>

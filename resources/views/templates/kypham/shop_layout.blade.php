@@ -149,8 +149,9 @@ $carts = \Cart::getListCart();
               setTimeout(function () {
                 if(data.instance =='default'){
                   $('.number-cart').html(data.count_cart);
-                  $('.cart-list').html(data.count_cart);
+                  $('.cart_list').html(data.html);
                   $('.subtotal_cart').html(data.subtotal);
+                  console.log($('.subtotal_cart'));
                 }else{
                   $('.sc-'+data.instance).html(data.count_cart);
                 }

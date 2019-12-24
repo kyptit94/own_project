@@ -27,37 +27,8 @@
                                     <li><a href="index3.html" tppabs="http://html.physcode.com/uray/index3.html">Home Page_v3</a></li>
                                 </ul>
                             </li>
-                            <li><a href="about.html" tppabs="http://html.physcode.com/uray/about.html">page</a>
-                                <ul>
-                                    <li><a href="about.html" tppabs="http://html.physcode.com/uray/about.html">About Us</a></li>
-                                    <li><a href="what-we-offer.html" tppabs="http://html.physcode.com/uray/what-we-offer.html">What We Offer</a></li>
-                                    <li><a href="our-team.html" tppabs="http://html.physcode.com/uray/our-team.html">Our Team</a></li>
-                                    <li><a href="comming-soon.html" tppabs="http://html.physcode.com/uray/comming-soon.html">Comming Soon</a></li>
-                                    <li><a href="error-page.html" tppabs="http://html.physcode.com/uray/error-page.html">Error Page</a></li>
-                                </ul>
-                            </li>
                             <li><a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">shop</a>
-                                <ul>
-                                    <li><a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">Product List</a></li>
-                                    <li><a href="product-single.html" tppabs="http://html.physcode.com/uray/product-single.html">Product Single</a></li>
-                                    <li><a href="shop-2-colum.html" tppabs="http://html.physcode.com/uray/shop-2-colum.html">Layouts</a><span
-                                        class="lnr lnr-chevron-right"></span>
-                                        <ul>
-                                            <li><a href="shop-2-colum.html" tppabs="http://html.physcode.com/uray/shop-2-colum.html">2 Colums</a></li>
-                                            <li><a href="shop-3-colum.html" tppabs="http://html.physcode.com/uray/shop-3-colum.html">3 Colums</a></li>
-                                            <li><a href="shop-4-colum.html" tppabs="http://html.physcode.com/uray/shop-4-colum.html">4 Colums</a></li>
-
-                                        </ul>
-                                    </li>
-                                    <li><a href="cart.html" tppabs="http://html.physcode.com/uray/cart.html">Shop Page</a><span class="lnr lnr-chevron-right"></span>
-                                        <ul>
-                                            <li><a href="my-account.html" tppabs="http://html.physcode.com/uray/my-account.html">My Account</a></li>
-                                            <li><a href="cart.html" tppabs="http://html.physcode.com/uray/cart.html">Cart</a></li>
-                                            <li><a href="wishlist.html" tppabs="http://html.physcode.com/uray/wishlist.html">Wish List</a></li>
-                                            <li><a href="checkout.html" tppabs="http://html.physcode.com/uray/checkout.html">Check Out</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
+                                @include('templates.'.sc_store('template').'.home_component.categories')
                             </li>
                             <li><a href="{{ route('news') }}" tppabs="{{ route('news') }}">blog</a>
                                 @if (!empty(sc_config('Content')))

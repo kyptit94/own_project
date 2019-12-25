@@ -4,10 +4,9 @@
 <section >
 <div class="container">
     <div class="row">
-        <h2 class="title text-center">{{ $title }}</h2>
 @if (count($orders) ==0)
     <div class="col-md-12 text-danger">
-        {{ trans('front.profile.empty_order') }}
+        Danh sách trống!
     </div>
 @else
 <table class="table box  table-bordered table-responsive">
@@ -102,10 +101,18 @@
 @endsection
 
 @section('breadcrumb')
-    <div class="breadcrumbs">
-        <ol class="breadcrumb">
-          <li><a href="{{ route('home') }}">Home</a></li>
-          <li class="active">{{ $title }}</li>
-        </ol>
+<div class="title-page"
+    style="background-image: url('Shop_3Columns-title.jpg')/*tpa=http://html.physcode.com/uray/imager/shop/Shop_3Columns-title.jpg*/;background-position: center center;background-size: cover;
+    margin-bottom: 20px; 
+    ">
+    <div class="container">
+      <div class="row">
+        <div class=" col-md-6 inner-title-page">
+          <h1>{{ $title }}</h1>
+          <p><span><a href="{{ route('home') }}">Home</a></span>
+          / {{ $title }}</p>
+        </div>
       </div>
+    </div>
+  </div>
 @endsection

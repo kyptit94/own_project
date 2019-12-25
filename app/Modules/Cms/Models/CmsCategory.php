@@ -82,6 +82,8 @@ class CmsCategory extends Model
         return $this->where('parent', $id)->count();
     }
 
+
+
     public function arrChild($id)
     {
         return $this->where('parent', $id)->pluck('id')->all();
@@ -115,7 +117,7 @@ class CmsCategory extends Model
     {
         $arrChild = $this->arrChild($id);
         $arrChild[] = $id;
-        $query = (new CmsContent)->where('status', 1)->whereIn('category_id', $arrChild)->sort();
+        $query = (new CmsContent)->with('category')->where('status', 1)->whereIn('category_id', $arrChild)->sort();
         if (!(int) $limit) {
             return $query->get();
         } else
@@ -124,6 +126,18 @@ class CmsCategory extends Model
         } else {
             return $query->limit($limit)->get();
         }
+
+    }
+
+    public function getCountContent($id)
+    {
+        return (new CmsContent)->with('category')->where('status', 1)->where('category_id', $id)->count();
+
+    }
+
+    public function getRelateContent($id, $cat_id)
+    {
+        return (new CmsContent)->with('category')->where('status', 1)->where('category_id', $cat_id)->where('id','!=',$id)->get();
 
     }
 

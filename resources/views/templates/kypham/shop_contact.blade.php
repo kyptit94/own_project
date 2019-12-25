@@ -5,11 +5,6 @@
      <div id="contact-page" class="container">
         <div class="bg">
             <div class="row">
-                <div class="col-sm-12">
-                    <h2 class="title text-center">{{ $title }}</h2>
-                </div>
-            </div>
-            <div class="row">
                 <div class="col-sm-8">
                     <div class="contact-form">
                         <h2 class="title text-center">{{ trans('front.contact_form.title') }}</h2>
@@ -90,23 +85,6 @@
                             <p>{{ sc_store('long_phone') }}</p>
                             <p>{{ sc_store('email') }}</p>
                         </address>
-                        <div class="social-networks">
-                            <h2 class="title text-center">Social Networking</h2>
-                            <ul>
-                                <li>
-                                    <a href="#"><i class="fa fa-facebook"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-twitter"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-google-plus"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-youtube"></i></a>
-                                </li>
-                            </ul>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -132,10 +110,18 @@
 @endsection
 
 @section('breadcrumb')
-    <div class="breadcrumbs">
-        <ol class="breadcrumb">
-          <li><a href="{{ route('home') }}">Home</a></li>
-          <li class="active">{{ $title }}</li>
-        </ol>
+<div class="title-page"
+    style="background-image: url('Shop_3Columns-title.jpg')/*tpa=http://html.physcode.com/uray/imager/shop/Shop_3Columns-title.jpg*/;background-position: center center;background-size: cover;
+    margin-bottom: 20px; 
+    ">
+    <div class="container">
+      <div class="row">
+        <div class=" col-md-6 inner-title-page">
+          <h1>{{ $title }}</h1>
+          <p><span><a href="{{ route('home') }}">Home</a></span> 
+          / {{ $title }}</p>
+        </div>
       </div>
+    </div>
+  </div>
 @endsection

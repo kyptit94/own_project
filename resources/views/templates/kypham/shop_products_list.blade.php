@@ -53,13 +53,13 @@
                 @endif
                 
                 <div class="icon-product">
-                  <button title="Thêm vào giỏ hàng" onClick="addToCartAjax('{{ $product_new->id }}','default')" class="btn">
+                  <button title="Thêm vào giỏ hàng" onClick="addToCartAjax('{{ $product->id }}','default')" class="btn">
                     <span class="lnr lnr-lock"></span>
                   </button>
-                  <button title="Thêm vào so sánh" onClick="addToCartAjax('{{ $product_new->id }}','compare')" type="button" class="btn click-quick-view" >
+                  <button title="Thêm vào so sánh" onClick="addToCartAjax('{{ $product->id }}','compare')" type="button" class="btn click-quick-view" >
                     <span class="lnr lnr-magnifier"></span>
                   </button>
-                  <button title="Thêm vào danh sách yêu thích" onClick="addToCartAjax('{{ $product_new->id }}','wishlist')" class="btn">
+                  <button title="Thêm vào danh sách yêu thích" onClick="addToCartAjax('{{ $product->id }}','wishlist')" class="btn">
                     <span class="lnr lnr-heart"></span>
                   </button>
                 </div>

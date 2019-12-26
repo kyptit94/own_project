@@ -104,29 +104,20 @@
                 </div>
                 <div class="introduce">
                     <div class="content-introduce">
-                        <h3>follow instagram</h3>
-                        <p>@Ura.cosmetic_beauty</p>
+                        <h3>Bảng điều khiển</h3>
                         <div class="img-controduce">
-                            @guest
-                            <li><a href="{{ route('login') }}"><i class="fa fa-lock"></i> {{ trans('front.login') }}</a></li>
-                            @else
-                            <li><a href="{{ route('member.index') }}"><i class="fa fa-user"></i> {{ trans('front.account') }}</a></li>
-                            <li><a href="{{ route('logout') }}" rel="nofollow" onclick="event.preventDefault();
-                            document.getElementById('logout-form').submit();"><i class="fa fa-power-off"></i> {{ trans('front.logout') }}</a></li>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
-                            </form>
-                            @endguest
-                        </div>
-                        <h4>newsletter</h4>
-                        <p>Subcribe to our newsletter</p>
-                        <input type="text" placeholder="Email">
-                        <button class="bt"><i class="fas fa-angle-right"></i></button>
-                        <div class="icon-introduce">
-                            <a href="" style="margin-left: 95px;"><i class="fab fa-twitter"></i></a>
-                            <a href=""><i class="fab fa-facebook"></i></a>
-                            <a href=""><i class="fab fa-linkedin-in"></i></a>
-                            <a href=""><i class="fab fa-instagram"></i></a>
+                            <ul>
+                                @guest
+                                <li><a href="{{ route('login') }}"><i class="fa fa-lock"></i> {{ trans('front.login') }}</a></li>
+                                @else
+                                <li><a href="{{ route('member.index') }}"><i class="fa fa-user"></i> {{ trans('front.account') }}</a></li>
+                                <li><a href="{{ route('logout') }}" rel="nofollow" onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();"><i class="fa fa-power-off"></i> {{ trans('front.logout') }}</a></li>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                                </form>
+                                @endguest
+                            </ul>
                         </div>
                         <span class="lnr lnr-cross close-introduce"></span>
                     </div>
@@ -195,7 +186,32 @@
                             </li>
                             <li><a href="javascript:void(0)" class="search-header1"><img src="search-header.png" tppabs="http://html.physcode.com/uray/imager/home/search-header.png" alt="" style="width: 20px;height: 20px;margin-top: -10px;"></a>
                             </li>
+                            <li><a href="javascript:void(0)" class="introduce1"><img
+                                src="control-introduce.png" tppabs="http://html.physcode.com/uray/imager/home/control-introduce.png" alt=""
+                                style="width: 16px;height: 16px;margin-top: -10px;"></a>
+                            </li>
                         </ul>
+                    </div>
+                </div>
+                
+                <div class="introduce">
+                    <div class="content-introduce">
+                        <h3>Bảng điều khiển</h3>
+                        <div class="img-controduce">
+                            <ul>
+                                @guest
+                                <li><a href="{{ route('login') }}"><i class="fa fa-lock"></i> {{ trans('front.login') }}</a></li>
+                                @else
+                                <li><a href="{{ route('member.index') }}"><i class="fa fa-user"></i> {{ trans('front.account') }}</a></li>
+                                <li><a href="{{ route('logout') }}" rel="nofollow" onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();"><i class="fa fa-power-off"></i> {{ trans('front.logout') }}</a></li>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                                </form>
+                                @endguest
+                            </ul>
+                        </div>
+                        <span class="lnr lnr-cross close-introduce"></span>
                     </div>
                 </div>
             </div>

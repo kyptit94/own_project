@@ -24,7 +24,7 @@
                             <li><a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">Cửa hàng</a>
                                 @include('templates.'.sc_store('template').'.home_component.categories')
                             </li>
-                            <li><a href="{{ route('cmsCategory') }}">Blog</a>
+                            <li><a>Blog</a>
                                 @if (!empty(sc_config('Content')))
                                 <ul>
                                     @php
@@ -223,7 +223,7 @@
                 <li><a href="product-list.html" tppabs="http://html.physcode.com/uray/product-list.html">Cửa hàng</a>
                     @include('templates.'.sc_store('template').'.home_component.categories')
                 </li>
-                <li><a href="{{ route('cmsCategory') }}" tppabs="{{ route('news') }}">Blog</a>
+                <li><a>Blog</a>
                     @if (!empty(sc_config('Content')))
                     <ul>
                         @php

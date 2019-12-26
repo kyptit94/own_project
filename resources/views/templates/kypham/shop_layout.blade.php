@@ -5,7 +5,7 @@ $carts = \Cart::getListCart();
 <html lang="{{ app()->getLocale() }}">
 
 <head>
-  <base href="{{asset('/uray')}}/" target="_blank">
+  <base href="{{asset('/uray')}}/">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="{{ $description??sc_store('description') }}">
